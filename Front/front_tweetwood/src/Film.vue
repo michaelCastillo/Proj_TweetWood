@@ -5,7 +5,7 @@
     <div v-if="film != null">
       <!-- image.tmdb.org/t/p/w185/ || imageLink+film.poster_path -->
       <h1>{{film.original_title}}</h1>
-      <img width="400px" :src= "imageLink" />
+      <img :src= "imageLink+film.poster_path" />
       <p>{{film.overview}}</p>
     </div>
     <span v-else>Cargando...</span>
@@ -24,7 +24,7 @@ export default {
     return {
       id: null,
       film: null,
-      imageLink: 'https://amp.businessinsider.com/images/592f4169b74af41b008b5977-1334-1001.jpg',
+      imageLink: 'https://image.tmdb.org/t/p/w185/',
     }
   },
   methods:{
