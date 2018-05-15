@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tweetwood_back.iml" filepath="$PROJECT_DIR$/.idea/modules/tweetwood_back.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tweetwood_back_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tweetwood_back_main.iml" group="tweetwood_back" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tweetwood_back_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tweetwood_back_test.iml" group="tweetwood_back" />
+    </modules>
+  </component>
+</project>
