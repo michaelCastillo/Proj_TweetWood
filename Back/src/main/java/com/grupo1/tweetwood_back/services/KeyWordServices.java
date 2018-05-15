@@ -33,4 +33,11 @@ public class KeyWordServices {
     public KeyWord getKeyWord(@PathVariable Long id){
         return this.keyWordRepository.findKeyWordById(id);
     }
+
+
+    @RequestMapping (value = "/createMany")
+    @ResponseBody
+    public List<KeyWord> createMany(@RequestBody List<KeyWord> keywords){
+        return this.keyWordRepository.saveAll(keywords);
+    }
 }
