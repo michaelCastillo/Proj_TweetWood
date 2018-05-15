@@ -2,10 +2,8 @@
   <div id="app">
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
     <ul>
       <li><router-link to='/'>Home</router-link></li>
-      <li><router-link to='/film'>Película</router-link></li>
       <li><router-link to='/graph'>Grafo</router-link></li>
     </ul>
     <router-view></router-view>
@@ -17,7 +15,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to TweetWood'
+      msg: 'Bienvenido a TweetWood'
     }
   }
 }
