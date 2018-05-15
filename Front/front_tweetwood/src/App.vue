@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
     <ul>
       <li><router-link to='/'>Home</router-link></li>
       <li><router-link to='/graph'>Grafo</router-link></li>
