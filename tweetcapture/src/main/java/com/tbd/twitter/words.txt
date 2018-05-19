@@ -1,0 +1,4 @@
+peliculas
+estrenos
+cartelera
+cine
