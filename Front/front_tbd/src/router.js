@@ -20,7 +20,7 @@ export default new Router({
         },
         {
             path: '/films/:id',
-            name: 'app-movie',
+            name: 'film',
             component: AppMovie
         }
     ]

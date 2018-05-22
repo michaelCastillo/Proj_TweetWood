@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1eea1202-c1a3-4620-afb9-b4fe0e0bf65e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/Front/front_tbd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/Film.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/Graph.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/Graphic.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/Home.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/InfluentialTweets.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/Home/Home.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/Layout/Footer.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/Layout/Nav.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/Movies/Graph.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/Movies/Movie.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/components/Movies/Movies.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/src/router.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/front_tweetwood/webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Front/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/front_tbd.zip" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="App.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Front/front_tbd/src/App.vue">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="Movie.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Front/front_tbd/src/components/Movies/Movie.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="487">
+              <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Front/front_tbd/src/components/Movies/Movie.vue" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/Front/front_tbd/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/Front/front_tbd/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Proj_TweetWood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj_TweetWood" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj_TweetWood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj_TweetWood" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj_TweetWood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj_TweetWood" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+              <item name="front_tbd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj_TweetWood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj_TweetWood" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+              <item name="front_tbd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj_TweetWood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj_TweetWood" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+              <item name="front_tbd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Proj_TweetWood" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Proj_TweetWood" type="462c0819:PsiDirectoryNode" />
+              <item name="Front" type="462c0819:PsiDirectoryNode" />
+              <item name="front_tbd" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="Movies" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1eea1202-c1a3-4620-afb9-b4fe0e0bf65e" name="Default" comment="" />
+      <created>1527003977493</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1527003977493</updated>
+      <workItem from="1527003979187" duration="1473000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1473000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24982357" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32992327" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Front/front_tbd/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Front/front_tbd/src/components/Movies/Movie.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="105" column="8" selection-start-line="105" selection-start-column="8" selection-end-line="105" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

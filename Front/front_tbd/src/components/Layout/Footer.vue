@@ -5,12 +5,8 @@
                 2018 — <strong>Grupo Nº1</strong>
 
             </v-flex>
-            <v-btn dark>
-                <v-icon dark left>fab fa-facebook</v-icon>
-            </v-btn>
-
-            <v-btn dark>
-                <v-icon dark left>fab fa-github</v-icon>
+            <v-btn dark href="https://github.com/michaelCastillo/Proj_TweetWood.git">
+                <v-icon dark left>fab fa-github</v-icon> Code
             </v-btn>
         </v-footer>
     </div>

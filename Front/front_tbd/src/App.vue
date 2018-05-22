@@ -13,7 +13,6 @@
 <script>
 import AppNav from './components/Layout/Nav.vue'
 import AppHome from './components/Home/Home.vue'
-//import AppMovies from './components/Movies/Movies.vue'
 import AppFooter from './components/Layout/Footer.vue'
 
 export default {
