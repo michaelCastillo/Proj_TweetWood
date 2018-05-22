@@ -1,49 +1,37 @@
 <template>
   <div id="app">
-    <ul>
-      <li><router-link to='/'>Home</router-link></li>
-      <li><router-link to='/graph'>Grafo</router-link></li>
-    </ul>
-    <router-view></router-view>
+    <v-app>
+        <app-nav></app-nav>
+        <v-content>
+            <router-view></router-view>
+        </v-content>
+        <app-footer></app-footer>
+    </v-app>
   </div>
 </template>
 
 <script>
+import AppNav from './components/Layout/Nav.vue'
+import AppHome from './components/Home/Home.vue'
+//import AppMovies from './components/Movies/Movies.vue'
+import AppFooter from './components/Layout/Footer.vue'
+
 export default {
   name: 'app',
-  data () {
-    return {
-      msg: 'Bienvenido a TweetWood'
-    }
+  components: {
+    AppNav, AppHome, AppFooter
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+    background-color: #ededed;
 }
 </style>

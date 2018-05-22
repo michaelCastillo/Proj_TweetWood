@@ -1,28 +1,18 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+//Routes
+import router from './router'
+
+//Components
 import App from './App.vue'
-import Home from './Home.vue'
-import Film from './Film.vue'
-import Graph from './Graph.vue'
 
-Vue.use(VueRouter);
 
-const routes=[
-  {path:'/', component: Home},
-  {path:'/film/:id', name: 'film', component: Film},
-  {path:'/graph', component: Graph}
-];
-
-const router=new VueRouter({
-  routes,
-  mode: 'history'
-});
-
-Vue.component('film', Film);
-Vue.component('graph', Graph);
+Vue.use(Vuetify)
+Vue.config.productionTip = false
 
 new Vue({
-  el: '#app',
-  router,
-  render: h => h(App)
-})
+    render: h => h(App),
+    router
+}).$mount('#app')
