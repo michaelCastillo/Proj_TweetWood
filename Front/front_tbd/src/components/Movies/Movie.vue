@@ -54,7 +54,7 @@
         name: 'film',
         mounted() {
             this.id = this.$route.params.id;
-            this.getFilms();
+            this.getFilm();
         },
         data: function () {
             return {
@@ -64,7 +64,7 @@
             }
         },
         methods: {
-            getFilms() {
+            getFilm() {
                 axios.get('https://api.themoviedb.org/3/movie/' + this.id + '?api_key=7917990738a6b09dbb79384b066eca6b')
                     .then((film) => {
                         this.film = film.data;

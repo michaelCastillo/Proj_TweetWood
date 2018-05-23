@@ -3,7 +3,7 @@
         <v-container>
             <h1> Administrador </h1>
             <h2>Lista de películas:</h2>
-            <v-card width="300px" class="movie-card" hover :to="{name: 'new-film'}">
+            <v-card width="300px" class="movie-card" hover :to="{name: 'new-film', params:{id: this.def}}">
               <v-card-title primary-title>
                   <div>
                       <h3 class="headline mb-0">Nueva Película</h3>
@@ -11,12 +11,10 @@
               </v-card-title>
             </v-card>
             <v-flex v-for="film in films">
-              <v-card width="300px" class="movie-card">
+              <v-card width="300px" class="movie-card" hover :to="{name: 'new-film', params:{ id: film.id }}">
                   <v-card-title primary-title>
                       <div>
-                          <h3 class="headline mb-0">{{ film.title}}</h3>
-                          <v-btn color="warning">Editar película</v-btn>
-                          <v-btn color="error">Eliminar película</v-btn>
+                          <h3 class="headline mb-0">{{film.title}}</h3>
                       </div>
                   </v-card-title>
               </v-card>
@@ -36,7 +34,8 @@
         },
         data: function () {
             return {
-                films: null
+                films: null,
+                def: -1
             }
         },
         methods: {

@@ -31,7 +31,7 @@ export default new Router({
             component: Admin
         },
         {
-            path: '/new-film',
+            path: '/new-film/:id',
             name: 'new-film',
             component: NewFilm
         }
