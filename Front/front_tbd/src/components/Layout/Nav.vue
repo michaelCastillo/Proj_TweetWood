@@ -14,7 +14,7 @@
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-subheader>Administrator</v-subheader>
-                <v-list-tile>
+                <v-list-tile to="/admin">
                         <v-list-tile-action><v-icon>settings</v-icon></v-list-tile-action>
                         <v-list-tile-content><v-list-tile-title>Administrator</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
