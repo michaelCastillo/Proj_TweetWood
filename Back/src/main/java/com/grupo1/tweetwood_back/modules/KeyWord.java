@@ -12,7 +12,7 @@ public class KeyWord {
     private Long id;
 
 
-    private String palabra;
+        private String palabra;
 
     @ManyToOne
     @JoinColumn(name = "id_pelicula_keyword")
