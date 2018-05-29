@@ -91,7 +91,7 @@ public class TwitterListener {
 			double[][] stgoCoordinates = {{-70.656962,-33.936031},{-70.510731,-33.093747}};
 			FilterQuery filter=new FilterQuery();
 			//filter.track(new String[]{"estrenos","peliculas"});
-			filter.locations(stgoCoordinates);
+			//filter.locations(stgoCoordinates);
 			filter.track(wordsToFilter);
 			filter.language(new String[]{"es"});
 			twitterStream.filter(filter);
