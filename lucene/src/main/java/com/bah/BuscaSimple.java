@@ -18,6 +18,8 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.FSDirectory;
 
+import javax.swing.text.Highlighter;
+
 public class BuscaSimple {
 
 	public static void main(String[] args) {
@@ -29,16 +31,20 @@ public class BuscaSimple {
 		    Analyzer analyzer = new StandardAnalyzer();
 		    
 		    QueryParser parser = new QueryParser("contenido", analyzer);
-		    Query query = parser.parse("Don quijote");
+		    Query query = parser.parse("Deadpool");
 		    
-		    TopDocs results = searcher.search(query, 10);
-		    ScoreDoc[] hits = results.scoreDocs;
-		    
-		    for(int i = 0; i < hits.length; i++) {
-		    	Document doc = searcher.doc(hits[i].doc);
+		    TopDocs hits = searcher.search(query, 10);
+		    //ScoreDoc[] hits = results.scoreDocs;
+
+
+		    for(int i = 0; i < hits.scoreDocs.length; i++) {
+
+		    	Document doc = searcher.doc(hits.scoreDocs[i].doc);
 		    	String path = doc.get("path");
-		    	System.out.println((i+1)+".- score="+hits[i].score + " doc="+hits[i].doc+" path="+path);
-		    }
+		    	System.out.println((i+1)+".- score="+hits.scoreDocs[i].score + " doc="+hits.scoreDocs[i].doc+" path="+path);
+                System.out.println(doc.get("deadpool"));
+            }
+
 		    reader.close();
 		}
 		catch(IOException ioe) {

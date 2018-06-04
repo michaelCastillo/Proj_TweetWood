@@ -6,6 +6,9 @@ import javax.annotation.PostConstruct;
 
 //import com.sun.xml.internal.ws.api.ResourceLoader;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -45,13 +48,21 @@ public class TwitterListener {
 	private TwitterStream twitterStream;
 	@Autowired
 	private MongoTemplate mongo;
-		
+
 	@PostConstruct
 	public void run() {
 		twitterStream.addListener(new StatusListener() {
 			public void onStatus(Status status) {
-				mongo.insert(status);
-	        }
+				BasicDBObject objTweet;
+				objTweet = new BasicDBObject("id", status.getId())
+						.append("text",status.getText())
+						.append("like",status.getFavoriteCount())
+						.append("geoLocation",status.getGeoLocation())
+						.append("retweet",status.getRetweetCount())
+						.append("locationUser",status.getUser().getLocation());
+
+				mongo.insert(objTweet,"statusJSONImpl");
+			}
 
 			@Override
 			public void onException(Exception arg0) {
@@ -84,13 +95,13 @@ public class TwitterListener {
 			words = getKeywords();
 			int s = words.size();
 			String[] wordsToFilter = new String[s];
-			for(int i = 0; i < s; i++)
+			for(int i = 0; i < s; i++){
 				wordsToFilter[i] = words.get(i);
-			for(int i = 0; i < s; i++)
-				System.out.println(wordsToFilter[i]);
+				System.out.println(words.get(i));
+			}
 			double[][] stgoCoordinates = {{-70.656962,-33.936031},{-70.510731,-33.093747}};
 			FilterQuery filter=new FilterQuery();
-			//filter.track(new String[]{"estrenos","peliculas"});
+			//filter.track(new String[]{"Star wars","Terminator","Deadpool","Deadpool 2", "Piratas del caribe","Titanic","X-men","Frozen","Rey leon"});
 			//filter.locations(stgoCoordinates);
 			filter.track(wordsToFilter);
 			filter.language(new String[]{"es"});

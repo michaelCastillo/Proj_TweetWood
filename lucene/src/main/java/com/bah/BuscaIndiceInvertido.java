@@ -58,9 +58,9 @@ public class BuscaIndiceInvertido {
       Query query = parser.parse(line);
       System.out.println("Searching for: " + query.toString(field));
             
-      if (repeat > 0) {                           // repeat & time as benchmark
+      if (repeat >= 0) {                           // repeat & time as benchmark
         Date start = new Date();
-        for (int i = 0; i < repeat; i++) {
+        for (int i = 0; i <= repeat; i++) {
           searcher.search(query, 100);
         }
         Date end = new Date();
@@ -91,7 +91,7 @@ public class BuscaIndiceInvertido {
 
     System.out.println("doPagingSearch\n");
     // Collect enough docs to show 5 pages
-    TopDocs results = searcher.search(query, 5 * hitsPerPage);
+    TopDocs results = searcher.search(query, 10 * hitsPerPage);
     ScoreDoc[] hits = results.scoreDocs;
     Scanner lector = new Scanner(System.in);
     
@@ -118,11 +118,13 @@ public class BuscaIndiceInvertido {
       for (int i = start; i < end; i++) {
         if (raw) {                              // output raw format
           System.out.println("doc="+hits[i].doc+" score="+hits[i].score);
+
           continue;
         }
 
         Document doc = searcher.doc(hits[i].doc);
         String path = doc.get("path");
+        System.out.println(doc.get("contenido"));
         if (path != null) {
           System.out.println((i+1) + ". " + path);
           String title = doc.get("title");

@@ -1,5 +1,6 @@
 package com.grupo1.tweetwood_back.lucene;
 
+import com.grupo1.tweetwood_back.modules.Estadistica;
 import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.SentimentAnalysis.SentimentAnalysisTweets;
 import java.io.*;
@@ -138,23 +139,39 @@ public class lucene {
         DB db = myMongo.getDB("twitter");
         DBCollection dbCollection = db.getCollection("statusJSONImpl");
         DBCursor db_cursor = dbCollection.find();
-
+        Estadistica estadistica = new Estadistica();
         ArrayList<String> tweets;
         ArrayList<String> keywords = getKeywords();
+        double pos = 0.0;
+        double neg = 0.0;
+        double stat = 0.0;
         boolean isIndexReady = createIndex(db_cursor);
-        if(isIndexReady){
-            for(String key: keywords) {
+        if (isIndexReady) {
+            for (String key : keywords) {
                 tweets = searchIndex(key);
-                for(String t: tweets)
-                    try {
-                        System.out.println("valoracion: " + sat.getAnalysis(t));
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                System.out.println("pelicula: " + key);
+                int id = sat.getIdPelicula(key);
+                if(id > -1) {
+                    for (String t : tweets) {
+                        try {
+                            System.out.printf("id pelicula: " + String.valueOf(id));
+                            if (sat.getAnalysis(t) > 0) pos++;
+                            else neg++;
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("\n");
                     }
-                System.out.println("\n");
+                    estadistica.setAprobacion((float) stat);
+                    stat = (pos * 100) / (pos + neg);
+                    System.out.println("estadistica: " + stat);
+                    //if (sat.postEstadistica(estadistica, id)) System.out.println("Estadistica subida con exito");
+                    //else System.out.printf("No se logro subir la estadistica");
+                    pos = 0.0;
+                    neg = 0.0;
+                }
+                else System.out.println("Pelicula no añadida en bd");
             }
         }
-
-
     }
 }

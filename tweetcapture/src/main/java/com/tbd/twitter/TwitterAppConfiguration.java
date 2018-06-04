@@ -19,7 +19,7 @@ public class TwitterAppConfiguration {
 
 	@Autowired
 	private TwitterProperties properties;
-
+	
     @Bean
     @ConditionalOnMissingBean
     public TwitterStreamFactory twitterStreamFactory() {
@@ -44,6 +44,6 @@ public class TwitterAppConfiguration {
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
 		MongoTemplate mongo=new MongoTemplate(new MongoClient(properties.getMongo().getHost()),properties.getMongo().getDatabase());
-		return mongo;
+		return mongo;	
 	}
 }

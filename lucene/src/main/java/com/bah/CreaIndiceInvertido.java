@@ -2,6 +2,10 @@ package com.bah;
 
 import java.io.*;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -9,9 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -26,16 +32,21 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+import org.apache.lucene.store.RAMDirectory;
+import twitter4j.JSONException;
+import twitter4j.JSONObject;
+import twitter4j.JSONArray;
+
 public class CreaIndiceInvertido {
 	private CreaIndiceInvertido() {}
 
 	public static void main(String[] args) {
+        //getDocuments();
 		System.out.println("CreaIndiceInvertido\n");
 		// TODO Auto-generated method stub
 	   String indexPath = "index";
-	   String docsPath = "lucene/documentos";
+	   String docsPath = "documentos";
 	   boolean create = true;
-	   
 	   final Path docDir = Paths.get(docsPath);
 	   if (!Files.isReadable(docDir)) {
 	     System.out.println("Document directory '" +docDir.toAbsolutePath()+ "' does not exist or is not readable, please check the path");
@@ -86,7 +97,44 @@ public class CreaIndiceInvertido {
 	     System.out.println(" caught a " + e.getClass() +
 	      "\n with message: " + e.getMessage());
 	   }
-	 }	
+	 }
+
+	 static void getDocuments(){
+	    //ArrayList<String> documents = new ArrayList<>();
+
+         String out;
+	    StringBuffer sb = new StringBuffer();
+	    try{
+            FileWriter document = new FileWriter("tweets.txt");
+            URL url = new URL("http://localhost:8080/tweets");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type","application/json");
+
+            if(conn.getResponseCode() != HttpURLConnection.HTTP_OK)
+                throw new RuntimeException("Http error code: " + conn.getResponseCode());
+
+            BufferedReader bf = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            out = bf.readLine();
+            JSONArray jsonResult = new JSONArray(out);
+            System.out.println(jsonResult.getJSONObject(0));
+            for(int i  = 0; i < jsonResult.length(); i++){
+                JSONObject obj = jsonResult.getJSONObject(i);
+                document.write(obj.getString("text") + "\n");
+                //documents.add(obj.getString("text"));
+            }
+            conn.disconnect();
+            document.close();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+     }
 	 
 	 static void indexDocs(final IndexWriter writer, Path path) throws IOException {
 		System.out.println("indexDocs\n");

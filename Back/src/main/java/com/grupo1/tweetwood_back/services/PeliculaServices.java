@@ -28,6 +28,21 @@ public class PeliculaServices {
         return this.peliculaRepository.findPeliculaById(id);
     }
 
+    @RequestMapping(value = "/search/{name}", method = RequestMethod.GET)
+    @ResponseBody
+    public int getPeliculaByName(@PathVariable("name") String name){
+        List<Pelicula> films = getPeliculas();
+        //name = name.toLowerCase().replaceAll("\\s+","");
+        System.out.println("pelicula casteada: " + name);
+        for(Pelicula p : films){
+            String film = p.getNombre().toLowerCase().replaceAll("\\s+","");
+            System.out.println("pelicula en bd: " + film);
+            if(film.equals(name.toLowerCase()))
+                return p.getId().intValue();
+        }
+        return -1;
+    }
+
     @RequestMapping(value = "/crear", method = RequestMethod.POST)
     @ResponseBody
     public Pelicula createPeliculas(@RequestBody Pelicula pelicula){

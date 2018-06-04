@@ -21,12 +21,14 @@ import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
+
 public class CreaSimple {
 
 	public static void main(String[] args) {
 		System.out.println("CreaSimple\n");
 		// TODO Auto-generated method stub
 		try {
+
 			Directory dir = FSDirectory.open(Paths.get("index"));
 		     Analyzer analyzer = new StandardAnalyzer();
 		     IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
@@ -37,7 +39,7 @@ public class CreaSimple {
 		     //// Add new documents to an existing index: OpenMode.CREATE_OR_APPEND
 		     
 		     IndexWriter writer = new IndexWriter(dir, iwc);
-		     String ruta = "libros/";
+		     String ruta = "documentos/";
 		     if(Files.isDirectory(Paths.get(ruta))) {
 		    	 File directorioLibros = new File(ruta);
 		    	 File[] libros = directorioLibros.listFiles();
@@ -59,11 +61,11 @@ public class CreaSimple {
 		    		 }
 		    	 }
 		     }
-		     writer.close();		     
+		     writer.close();
 		}
 		catch(IOException ioe) {
 			Logger.getLogger(BuscaSimple.class.getName()).log(Level.SEVERE, null, ioe);
-		}		
+		}
 	}
 
 }

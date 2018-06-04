@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Proj_TweetWood.iml" filepath="$PROJECT_DIR$/Proj_TweetWood.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Proj_TweetWood.iml" filepath="$PROJECT_DIR$/.idea/Proj_TweetWood.iml" />
     </modules>
   </component>
 </project>
