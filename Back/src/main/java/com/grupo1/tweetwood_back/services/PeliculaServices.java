@@ -34,7 +34,13 @@ public class PeliculaServices {
         return this.peliculaRepository.save(pelicula);
     }
 
-
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @ResponseBody
+    public Pelicula deletePelicula(@PathVariable("id") Long id){
+        Pelicula film = peliculaRepository.findPeliculaById(id);
+        peliculaRepository.delete(film);
+        return film;
+    }
 
 
 

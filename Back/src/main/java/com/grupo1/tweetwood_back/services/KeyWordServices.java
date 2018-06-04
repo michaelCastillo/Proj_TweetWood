@@ -3,6 +3,7 @@ package com.grupo1.tweetwood_back.services;
 
 import com.grupo1.tweetwood_back.modules.KeyWord;
 import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
+import javassist.compiler.ast.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,13 @@ public class KeyWordServices {
     @ResponseBody
     public List<KeyWord> createMany(@RequestBody List<KeyWord> keywords){
         return this.keyWordRepository.saveAll(keywords);
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @ResponseBody
+    public KeyWord deleteKeyWord(@PathVariable("id") Long id){
+        KeyWord keyword = keyWordRepository.findKeyWordById(id);
+        keyWordRepository.delete(keyword);
+        return keyword;
     }
 }
