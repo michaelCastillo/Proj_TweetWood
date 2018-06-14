@@ -5,6 +5,9 @@ import AppMovie from './components/Movies/Movie.vue'
 import AppHome from './components/Home/Home.vue'
 import Admin from './components/Admin/Admin.vue'
 import NewFilm from './components/Admin/NewFilm.vue'
+import Genre from './components/Admin/Genre.vue'
+import Films from './components/Admin/Films.vue'
+import NewGenre from './components/Admin/NewGenre.vue'
 
 Vue.use(Router)
 
@@ -34,6 +37,21 @@ export default new Router({
             path: '/new-film/:id',
             name: 'new-film',
             component: NewFilm
+        },
+        {
+            path: '/genre',
+            name: 'genre',
+            component: Genre
+        },
+        {
+            path: '/new-genre',
+            name: 'new-genre',
+            component: NewGenre
+        },
+        {
+            path: '/films-admin',
+            name: 'films-admin',
+            component: Films
         }
     ]
 })
