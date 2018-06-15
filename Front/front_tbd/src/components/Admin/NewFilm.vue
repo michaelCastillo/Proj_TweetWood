@@ -63,10 +63,25 @@
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
-          axios.post('/api/submit', {
-            title: this.title,
-            genre: this.genre,
-            keyWords: this.keyWords
+          let local_url = `http://localhost:1310/peliculas/crear`;
+          let keywordsList = [];
+          let keywords = this.keyWords.map(keyword =>{
+            let keyJson = {palabra:keyword};
+            keywordsList.push(keyJson);
+          });
+          let objPost = {
+            nombre: this.title,
+            restriccion:"+15",
+            //genre: this.genre,
+            keywords: keywordsList
+          };
+            console.log(keywordsList);
+            console.log(objPost);
+          axios.post(local_url,objPost)
+          .then(response =>{
+            console.log(response);
+          }).catch(error => {
+            console.log(error);
           })
         }
       },
