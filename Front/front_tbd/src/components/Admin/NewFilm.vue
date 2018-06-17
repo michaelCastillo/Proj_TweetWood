@@ -64,6 +64,7 @@
       submit () {
         if (this.$refs.form.validate()) {
           let local_url = `http://localhost:1310/peliculas/crear`;
+          let global_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear`;
           let keywordsList = [];
           let keywords = this.keyWords.map(keyword =>{
             let keyJson = {palabra:keyword};
@@ -77,7 +78,7 @@
           };
             console.log(keywordsList);
             console.log(objPost);
-          axios.post(local_url,objPost)
+          axios.post(global_url,objPost)
           .then(response =>{
             console.log(response);
           }).catch(error => {
