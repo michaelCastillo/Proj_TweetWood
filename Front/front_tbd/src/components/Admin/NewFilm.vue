@@ -7,13 +7,28 @@
         required
       ></v-text-field>
       <v-text-field
+        v-model="restriction"
+        label="Restricción"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="url_img"
+        label="Url Imagen"
+        required
+      ></v-text-field>
+      <v-text-field
         v-model="genre"
         label="Género"
         required
       ></v-text-field>
+      <br>
+      <h3>Agregar Keywords</h3>
+      <br>
+      <hr>
+      <br>
       <v-text-field
         v-model="newWord"
-        label="Palabra clave"
+        label="Keyword"
         required
       ></v-text-field>
       <v-btn @click="add">Agregar Palabra</v-btn>
@@ -49,8 +64,10 @@
       valid: true,
       title: '',
       genre: '',
+      restriction: '',
+      url_img: '',
       newWord: null,
-      keyWords: ["palabras", "de", "ejemplo"],
+      keyWords: [],
       film: null
     }),
     mounted(){
@@ -63,7 +80,6 @@
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
-          let local_url = `http://localhost:1310/peliculas/crear`;
           let global_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear`;
           let keywordsList = [];
           let keywords = this.keyWords.map(keyword =>{
@@ -72,15 +88,15 @@
           });
           let objPost = {
             nombre: this.title,
-            restriccion:"+15",
+            restriccion:this.restriction,
             //genre: this.genre,
             keywords: keywordsList
           };
-            console.log(keywordsList);
-            console.log(objPost);
           axios.post(global_url,objPost)
           .then(response =>{
             console.log(response);
+            this.$router.push('/films-admin');
+            alert(this.title+" agregada corectamente.");
           }).catch(error => {
             console.log(error);
           })
@@ -98,7 +114,7 @@
         this.keyWords.splice(index,1);
       },
       getFilm() {
-          axios.get('https://api.themoviedb.org/3/movie/' + this.id + '?api_key=7917990738a6b09dbb79384b066eca6b')
+          axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id + '/get')
               .then((film) => {
                   this.film = film.data;
                   this.title = this.film.title;
