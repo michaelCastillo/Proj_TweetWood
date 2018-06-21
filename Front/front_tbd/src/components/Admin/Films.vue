@@ -23,6 +23,7 @@
                       </div>
                   </v-card-title>
               </v-card>
+              <v-btn flat color="red" @click="del(film.id)">Eliminar</v-btn>
             </v-flex>
         </v-container>
     </div>
@@ -50,6 +51,15 @@
         .then((films)=>{
           this.films=films.data;
           });
+      },
+      del(id){
+        axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas', {data:{id_pelicula:id}})
+        .then(response =>{
+          console.log(response);
+          this.getFilms();
+        }).catch(error => {
+          console.log(error);
+        });
       }
     }
   }

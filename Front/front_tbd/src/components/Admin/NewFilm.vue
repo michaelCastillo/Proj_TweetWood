@@ -81,25 +81,45 @@
       submit () {
         if (this.$refs.form.validate()) {
           let global_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear`;
+          let put_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas`;
           let keywordsList = [];
           let keywords = this.keyWords.map(keyword =>{
             let keyJson = {palabra:keyword};
             keywordsList.push(keyJson);
           });
-          let objPost = {
-            nombre: this.title,
-            restriccion:this.restriction,
-            //genre: this.genre,
-            keywords: keywordsList
-          };
-          axios.post(global_url,objPost)
-          .then(response =>{
-            console.log(response);
-            this.$router.push('/films-admin');
-            alert(this.title+" agregada corectamente.");
-          }).catch(error => {
-            console.log(error);
-          })
+          if(this.id==-1){
+            let objPost = {
+              nombre: this.title,
+              restriccion:this.restriction,
+              //genre: this.genre,
+              keywords: keywordsList
+            };
+            axios.post(global_url,objPost)
+            .then(response =>{
+              console.log(response);
+              this.$router.push('/films-admin');
+              alert(this.title+" agregada corectamente.");
+            }).catch(error => {
+              console.log(error);
+            })
+          }
+          else{
+            let objPost = {
+              id_pelicula: this.id,
+              nombre: this.title,
+              restriccion:this.restriction,
+              //genre: this.genre,
+              keywords: keywordsList
+            };
+            axios.put(put_url,{data:objPost})
+            .then(response =>{
+              console.log(response);
+              this.$router.push('/films-admin');
+              alert(this.title+" modificada corectamente.");
+            }).catch(error => {
+              console.log(error);
+            })
+          }
         }
       },
       clear () {
@@ -114,11 +134,15 @@
         this.keyWords.splice(index,1);
       },
       getFilm() {
-          axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id + '/get')
+          axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id)
               .then((film) => {
                   this.film = film.data;
-                  this.title = this.film.title;
-                  this.genre = this.film.genres[0].name;
+                  this.title = this.film.nombre;
+                  //this.genre = this.film.genres[0].name;
+                  this.restriction = this.film.restriccion;
+                  this.film.keywords.map(keyword =>{
+                    this.keyWords.push(keyword.palabra);
+                  });
               });
       }
     }
