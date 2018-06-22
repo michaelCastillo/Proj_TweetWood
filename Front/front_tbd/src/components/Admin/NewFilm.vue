@@ -105,13 +105,14 @@
           }
           else{
             let objPost = {
-              id_pelicula: this.id,
+              id: this.id,
               nombre: this.title,
               restriccion:this.restriction,
               //genre: this.genre,
               keywords: keywordsList
             };
-            axios.put(put_url,{data:objPost})
+            console.log("ID: "+this.id);
+            axios.put(put_url,objPost)
             .then(response =>{
               console.log(response);
               this.$router.push('/films-admin');
