@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface KeyWordRepository extends JpaRepository<KeyWord, Long> {
     public KeyWord findKeyWordById(Long id);
+    public boolean existsKeyWordByPalabra(String palabra);
 }

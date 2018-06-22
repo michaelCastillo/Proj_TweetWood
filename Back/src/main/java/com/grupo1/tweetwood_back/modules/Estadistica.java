@@ -1,6 +1,8 @@
 package com.grupo1.tweetwood_back.modules;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class Estadistica {
 
     @ManyToOne
     @JoinColumn(name = "id_pelicula_estadistica")
+    @JsonIgnore
     private Pelicula pelicula;
 
     public Long getId() {

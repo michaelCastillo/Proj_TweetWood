@@ -1,12 +1,17 @@
 package com.grupo1.tweetwood_back.modules;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "generos")
 public class Genero {
+
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +22,13 @@ public class Genero {
     private int valorizacion;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name="peliculas_generos",joinColumns = @JoinColumn(name = "id_pelicula"), inverseJoinColumns = @JoinColumn(name = "id_genero"))
     private List<Pelicula> peliculas;
+
+
+
+
 
     public List<Pelicula> getPeliculas() {
         return peliculas;

@@ -13,12 +13,14 @@ public class UsuarioServices {
     @Autowired
     public UsuarioRepository usuarioRepository;
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Usuario> getUsuarios(){
         return this.usuarioRepository.findAll();
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Usuario createUsuario(@RequestBody Usuario usuario){
@@ -26,6 +28,7 @@ public class UsuarioServices {
     }
 
 
+    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Usuario getUsuarioById(@PathVariable Long id){

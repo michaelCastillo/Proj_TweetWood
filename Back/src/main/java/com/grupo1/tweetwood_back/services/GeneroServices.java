@@ -16,18 +16,21 @@ public class GeneroServices {
     @Autowired
     public GeneroRepository generoRepository;
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Genero> getAllGeneros(){
         return this.generoRepository.findAll();
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public Genero createGenero(@RequestBody Genero genero){
         return this.generoRepository.save(genero);
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @ResponseBody
     public Genero getGenero(@PathVariable Long id){

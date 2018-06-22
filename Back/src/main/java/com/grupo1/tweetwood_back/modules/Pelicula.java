@@ -22,8 +22,23 @@ public class Pelicula {
     @JsonIgnore
     private Usuario usuario;
 
-    @ManyToMany( mappedBy = "peliculas")
+
+    @ManyToMany( mappedBy = "peliculas", cascade = CascadeType.ALL)
     private List<Genero> generos;
+
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL)
+    private List<KeyWord> keywords;
+
+    @OneToMany(mappedBy = "pelicula")
+    private List<Estadistica> estadisticas;
+
+    public List<Estadistica> getEstadisticas() {
+        return estadisticas;
+    }
+
+    public void setEstadisticas(List<Estadistica> estadisticas) {
+        this.estadisticas = estadisticas;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -31,6 +46,14 @@ public class Pelicula {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<KeyWord> getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List<KeyWord> keywords) {
+        this.keywords = keywords;
     }
 
     public Long getId() {

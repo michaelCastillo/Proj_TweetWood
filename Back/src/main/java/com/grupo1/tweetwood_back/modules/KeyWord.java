@@ -1,5 +1,7 @@
 package com.grupo1.tweetwood_back.modules;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,9 +14,10 @@ public class KeyWord {
     private Long id;
 
 
-        private String palabra;
+    private String palabra;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_pelicula_keyword")
     private Pelicula pelicula;
 
