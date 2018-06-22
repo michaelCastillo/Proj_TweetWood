@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.apache.lucene', name: 'lucene-core', version: '7.3.1'
+    compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '7.3.1'
+}
