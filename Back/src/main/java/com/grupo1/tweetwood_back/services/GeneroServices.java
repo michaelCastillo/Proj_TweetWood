@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/generos")
@@ -37,7 +38,20 @@ public class GeneroServices {
         return this.generoRepository.findGeneroById(id);
     }
 
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.PUT)
+    @ResponseBody
+    public Genero updateGenero(@RequestBody Genero genero){
+        return this.generoRepository.save(genero);
+    }
 
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteGenero(@RequestBody Map<String,String> gen){
+        System.out.println(gen);
+        this.generoRepository.deleteGeneroById(Long.parseLong(gen.get("id_genero")));
+    }
 
 
 

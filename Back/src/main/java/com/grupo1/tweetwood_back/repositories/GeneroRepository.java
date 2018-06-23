@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface GeneroRepository extends JpaRepository<Genero, Long> {
     public Genero findGeneroById(Long id);
     public boolean existsGeneroByNombre(String nombre);
+    public Genero deleteGeneroById(Long id);
 }

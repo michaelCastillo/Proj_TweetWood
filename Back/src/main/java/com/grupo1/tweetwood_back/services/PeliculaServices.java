@@ -48,11 +48,15 @@ public class PeliculaServices {
     @ResponseBody
     public Pelicula createPeliculas(@RequestBody Pelicula pelicula){
         List<KeyWord> keyWords = pelicula.getKeywords();
+        for(Genero genero: pelicula.getGeneros()){
+            genero.addPelicula(pelicula);
+        }
         for(KeyWord key: keyWords){
             System.out.println("Key: "+key.getPalabra());
             key.setPelicula(pelicula);
         }
         Pelicula peli = this.peliculaRepository.save(pelicula);
+        this.generoRepository.saveAll(pelicula.getGeneros());
         this.keyWordRepository.saveAll(keyWords);
         return peli;
     }
@@ -149,7 +153,13 @@ public class PeliculaServices {
                 System.out.println("Keyword: "+keyword.getPalabra());
                 keyword.setPelicula(peliculaFromRepo);
             }
+            //Se guardan los generos
+            for(Genero genero: pelicula.getGeneros()){
+                System.out.println("genero: "+genero.getNombre());
+                genero.addPelicula(pelicula);
+            }
             //Se guardan las keywords
+            this.generoRepository.saveAll(pelicula.getGeneros());
             this.keyWordRepository.saveAll(pelicula.getKeywords());
             this.peliculaRepository.save(pelicula);
             response.put("status","OK! updated");

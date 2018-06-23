@@ -4,6 +4,7 @@ package com.grupo1.tweetwood_back.modules;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,7 @@ public class Genero {
     @JsonIgnore
     @JoinTable(name="peliculas_generos",joinColumns = @JoinColumn(name = "id_pelicula"), inverseJoinColumns = @JoinColumn(name = "id_genero"))
     private List<Pelicula> peliculas;
+
 
 
 
@@ -60,5 +62,15 @@ public class Genero {
 
     public void setValorizacion(int valorizacion) {
         this.valorizacion = valorizacion;
+    }
+
+    public void addPelicula(Pelicula pelicula){
+        System.out.println("pelicula: "+pelicula.getNombre());
+        if(peliculas == null){
+            this.peliculas = new ArrayList<>();
+
+        }
+        this.peliculas.add(pelicula);
+
     }
 }
