@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -139,8 +140,26 @@ public class PeliculaServices {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public Pelicula updatePelicula(@RequestBody Pelicula pelicula){
-        return this.peliculaRepository.save(pelicula);
+    public Map<String,Object> updatePelicula(@RequestBody Pelicula pelicula){
+        Pelicula peliculaFromRepo;
+        Map<String,Object> response = new HashMap<>();
+        if( (peliculaFromRepo = this.peliculaRepository.findPeliculaById(pelicula.getId()) )!= null){
+            //Si existe la pelicula
+            for(KeyWord keyword : pelicula.getKeywords()){
+                System.out.println("Keyword: "+keyword.getPalabra());
+                keyword.setPelicula(peliculaFromRepo);
+            }
+            //Se guardan las keywords
+            this.keyWordRepository.saveAll(pelicula.getKeywords());
+            this.peliculaRepository.save(pelicula);
+            response.put("status","OK! updated");
+        }else{
+            response.put("status","Error not updated");
+        }
+        response.put("pelicula",peliculaFromRepo);
+        return  response;
+
+
     }
 
 

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Gradle : com.grupo1 : tweetwood_back-0.0.1-SNAPSHOT.war (exploded)">
-    <output-path>$PROJECT_DIR$/build/libs/exploded/tweetwood_back-0.0.1-SNAPSHOT.war</output-path>
+    <output-path />
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$">
         <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
@@ -23,8 +23,8 @@
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-aop:2.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:2.0.2.RELEASE" />
-          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.46" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter:2.0.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.46" />
           <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:5.2.17.Final" />
           <element id="library" level="project" name="Gradle: javax.transaction:javax.transaction-api:1.2" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-jpa:2.0.7.RELEASE" />
