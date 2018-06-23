@@ -46,19 +46,44 @@ public class PeliculaServices {
     @CrossOrigin
     @RequestMapping(value = "/crear", method = RequestMethod.POST)
     @ResponseBody
-    public Pelicula createPeliculas(@RequestBody Pelicula pelicula){
+    public Map<String,Object> createPeliculas(@RequestBody Pelicula pelicula){
+        Map<String,Object> response = new HashMap<>();
         List<KeyWord> keyWords = pelicula.getKeywords();
-        for(Genero genero: pelicula.getGeneros()){
-            genero.addPelicula(pelicula);
+        if(this.peliculaRepository.findPeliculaByNombre(pelicula.getNombre()) == null){
+            for(Genero genero: pelicula.getGeneros()){
+                genero.addPelicula(pelicula);
+            }
+            for(KeyWord key: keyWords){
+                System.out.println("Key: "+key.getPalabra());
+                key.setPelicula(pelicula);
+            }
+            Pelicula peli = this.peliculaRepository.save(pelicula);
+            this.generoRepository.saveAll(pelicula.getGeneros());
+            this.keyWordRepository.saveAll(keyWords);
+            response.put("status","Added");
+            response.put("pelicula",pelicula);
+        }else{
+            response.put("status","Error, the movie exists");
+            response.put("pelicula",pelicula);
         }
-        for(KeyWord key: keyWords){
-            System.out.println("Key: "+key.getPalabra());
-            key.setPelicula(pelicula);
-        }
-        Pelicula peli = this.peliculaRepository.save(pelicula);
-        this.generoRepository.saveAll(pelicula.getGeneros());
-        this.keyWordRepository.saveAll(keyWords);
-        return peli;
+        return response;
+
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/disponible",method = RequestMethod.PUT)
+    @ResponseBody
+    public Pelicula setDisponible(@RequestBody Map<String,Long> msg){
+        Pelicula peli = this.peliculaRepository.findPeliculaById(msg.get("id_pelicula"));
+        peli.setDisponible(true);
+        return this.peliculaRepository.save(peli);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteAll(){
+        this.peliculaRepository.deleteAll();
     }
 
     @CrossOrigin
@@ -137,9 +162,27 @@ public class PeliculaServices {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.DELETE)
     @ResponseBody
-    public void deletePelicula(@RequestBody Map<String,String> msg){
+    public Map<String,Object> deletePelicula(@RequestBody Map<String,String> msg){
         Long id_pelicula = Long.parseLong(msg.get("id_pelicula"));
-        this.peliculaRepository.delete(this.peliculaRepository.findPeliculaById(id_pelicula));
+        Pelicula peli = this.peliculaRepository.findPeliculaById(id_pelicula);
+        Map<String,Object> response = new HashMap<>();
+        if(peli != null){
+            for(Genero genero: peli.getGeneros()){
+                genero.removePelicula(peli);
+            }
+            for(KeyWord key: peli.getKeywords()){
+                this.keyWordRepository.delete(key);//Se elimina la keyword
+            }
+            peli.setDisponible(false);
+            response.put("status","deleted");
+            response.put("pelicula",peli);
+        }else{
+            response.put("status","Error: doesn't exist");
+            response.put("pelicula",peli);
+        }
+        return response;
+
+
     }
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)

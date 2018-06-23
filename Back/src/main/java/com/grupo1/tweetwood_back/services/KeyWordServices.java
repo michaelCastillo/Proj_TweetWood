@@ -47,5 +47,11 @@ public class KeyWordServices {
         return this.keyWordRepository.saveAll(keywords);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/deleteAll", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteAll(){
+        this.keyWordRepository.deleteAll();
+    }
 
 }

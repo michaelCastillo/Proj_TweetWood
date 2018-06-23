@@ -10,11 +10,16 @@
   <component name="ChangeListManager">
     <list default="true" id="880e95d7-af82-4a97-bce5-ca5131faca01" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/grupo1/tweetwood_back/modules/Genero.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/grupo1/tweetwood_back/modules/Genero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/grupo1/tweetwood_back/modules/Pelicula.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/grupo1/tweetwood_back/modules/Pelicula.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/grupo1/tweetwood_back/services/GeneroServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/grupo1/tweetwood_back/services/GeneroServices.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/GeneroRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/GeneroRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -59,13 +64,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PeliculaServices.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PeliculaServices.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="140" column="56" selection-start-line="140" selection-start-column="56" selection-end-line="140" selection-end-column="56" />
+            <state relative-caret-position="209">
+              <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2768#2769#0" expanded="true" />
+                <element signature="e#2819#2820#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,8 +81,32 @@
       <file leaf-file-name="Genero.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="72" column="37" selection-start-line="72" selection-start-column="37" selection-end-line="72" selection-end-column="37" />
+            <state relative-caret-position="328">
+              <caret line="40" column="40" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+              <folding>
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#709#710#0" expanded="true" />
+                <element signature="e#816#817#0" expanded="true" />
+                <element signature="e#835#836#0" expanded="true" />
+                <element signature="e#682#683#0" expanded="true" />
+                <element signature="e#715#716#0" expanded="true" />
+                <element signature="e#768#769#0" expanded="true" />
+                <element signature="e#812#813#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KeyWord.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="277">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#512#513#0" expanded="true" />
+                <element signature="e#540#541#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,21 +114,8 @@
       <file leaf-file-name="GeneroServices.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
-              <folding>
-                <element signature="e#1180#1181#0" expanded="true" />
-                <element signature="e#1219#1220#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneroRepository.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/GeneroRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="1054">
+              <caret line="82" column="30" lean-forward="true" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -111,6 +129,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="KeyWordServices.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="23" column="35" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="35" />
+              <folding>
+                <element signature="e#1544#1545#0" expanded="true" />
+                <element signature="e#1563#1564#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="EstadisticaRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/EstadisticaRepository.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -120,20 +151,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KeyWordServices.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PeliculaRepository.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="9" column="25" selection-start-line="9" selection-end-line="10" />
+            <state relative-caret-position="136">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -141,10 +163,22 @@
       <file leaf-file-name="Pelicula.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="26" column="16" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="16" />
+            <state relative-caret-position="-629">
+              <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#580#581#0" expanded="true" />
+                <element signature="e#618#619#0" expanded="true" />
+                <element signature="e#913#914#0" expanded="true" />
+                <element signature="e#946#947#0" expanded="true" />
+                <element signature="e#999#1000#0" expanded="true" />
+                <element signature="e#1043#1044#0" expanded="true" />
+                <element signature="e#1800#1801#0" expanded="true" />
+                <element signature="e#1830#1831#0" expanded="true" />
+                <element signature="e#2134#2135#0" expanded="true" />
+                <element signature="e#2172#2173#0" expanded="true" />
+                <element signature="e#2218#2219#0" expanded="true" />
+                <element signature="e#2261#2262#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -651,19 +685,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Usuario.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/KeyWordRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Estadistica.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/TweetwoodBackApplication.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/EstadisticaService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/UsuarioServices.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/GeneroRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java" />
       </list>
     </option>
   </component>
@@ -687,6 +721,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -758,9 +793,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -882,6 +916,7 @@
       <workItem from="1529419979693" duration="3690000" />
       <workItem from="1529707541148" duration="526000" />
       <workItem from="1529712882403" duration="4290000" />
+      <workItem from="1529761040177" duration="5925000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;Se agrega Back basico, con getAll, getById, create.&quot;">
       <created>1526349711493</created>
@@ -901,7 +936,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65382000" />
+    <option name="totallyTimeSpent" value="71307000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
@@ -913,7 +948,6 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.32984293" />
       <window_info anchor="right" id="Database" order="3" visible="true" weight="0.26236978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -925,8 +959,8 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32984293" />
       <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32984293" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19921875" />
@@ -936,9 +970,10 @@
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.32984293" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
     </layout>
@@ -989,6 +1024,18 @@
           <caret line="2" column="38" selection-start-line="2" selection-end-line="3" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#618#619#0" expanded="true" />
+            <element signature="e#913#914#0" expanded="true" />
+            <element signature="e#946#947#0" expanded="true" />
+            <element signature="e#999#1000#0" expanded="true" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1800#1801#0" expanded="true" />
+            <element signature="e#1830#1831#0" expanded="true" />
+            <element signature="e#2134#2135#0" expanded="true" />
+            <element signature="e#2172#2173#0" expanded="true" />
+            <element signature="e#2218#2219#0" expanded="true" />
+            <element signature="e#2261#2262#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1041,6 +1088,18 @@
           <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#618#619#0" expanded="true" />
+            <element signature="e#913#914#0" expanded="true" />
+            <element signature="e#946#947#0" expanded="true" />
+            <element signature="e#999#1000#0" expanded="true" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1800#1801#0" expanded="true" />
+            <element signature="e#1830#1831#0" expanded="true" />
+            <element signature="e#2134#2135#0" expanded="true" />
+            <element signature="e#2172#2173#0" expanded="true" />
+            <element signature="e#2218#2219#0" expanded="true" />
+            <element signature="e#2261#2262#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1065,6 +1124,8 @@
           <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2768#2769#0" expanded="true" />
+            <element signature="e#2819#2820#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1117,6 +1178,8 @@
           <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2768#2769#0" expanded="true" />
+            <element signature="e#2819#2820#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1183,16 +1246,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/UsuarioServices.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1207,55 +1260,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/GeneroRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="72" column="37" selection-start-line="72" selection-start-column="37" selection-end-line="72" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#1180#1181#0" expanded="true" />
-            <element signature="e#1219#1220#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="140" column="56" selection-start-line="140" selection-start-column="56" selection-end-line="140" selection-end-column="56" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -1266,10 +1274,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="9" column="25" selection-start-line="9" selection-end-line="10" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
@@ -1280,10 +1288,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/GeneroRepository.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/GeneroServices.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        <state relative-caret-position="1054">
+          <caret line="82" column="30" lean-forward="true" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/repositories/PeliculaRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/KeyWordServices.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="35" />
+          <folding>
+            <element signature="e#1544#1545#0" expanded="true" />
+            <element signature="e#1563#1564#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Genero.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="40" column="40" selection-start-line="40" selection-start-column="40" selection-end-line="40" selection-end-column="40" />
+          <folding>
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#816#817#0" expanded="true" />
+            <element signature="e#835#836#0" expanded="true" />
+            <element signature="e#682#683#0" expanded="true" />
+            <element signature="e#715#716#0" expanded="true" />
+            <element signature="e#768#769#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/KeyWord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#540#541#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/modules/Pelicula.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-629">
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#618#619#0" expanded="true" />
+            <element signature="e#913#914#0" expanded="true" />
+            <element signature="e#946#947#0" expanded="true" />
+            <element signature="e#999#1000#0" expanded="true" />
+            <element signature="e#1043#1044#0" expanded="true" />
+            <element signature="e#1800#1801#0" expanded="true" />
+            <element signature="e#1830#1831#0" expanded="true" />
+            <element signature="e#2134#2135#0" expanded="true" />
+            <element signature="e#2172#2173#0" expanded="true" />
+            <element signature="e#2218#2219#0" expanded="true" />
+            <element signature="e#2261#2262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/grupo1/tweetwood_back/services/PeliculaServices.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="54" column="13" lean-forward="true" selection-start-line="54" selection-start-column="13" selection-end-line="54" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2768#2769#0" expanded="true" />
+            <element signature="e#2819#2820#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

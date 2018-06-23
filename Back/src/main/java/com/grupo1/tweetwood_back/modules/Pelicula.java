@@ -3,6 +3,7 @@ package com.grupo1.tweetwood_back.modules;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,17 +17,20 @@ public class Pelicula {
 
     private String nombre;
     private String restriccion;
-
+    private boolean disponible;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     @JsonIgnore
     private Usuario usuario;
 
+    public Pelicula(){
+        this.disponible = true;
+    }
 
-    @ManyToMany( mappedBy = "peliculas", cascade = CascadeType.ALL)
+    @ManyToMany( mappedBy = "peliculas")
     private List<Genero> generos;
 
-    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pelicula")
     private List<KeyWord> keywords;
 
     @OneToMany(mappedBy = "pelicula")
@@ -34,6 +38,14 @@ public class Pelicula {
 
     public List<Estadistica> getEstadisticas() {
         return estadisticas;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     public void setEstadisticas(List<Estadistica> estadisticas) {
@@ -83,8 +95,22 @@ public class Pelicula {
     public List<Genero> getGeneros() {
         return generos;
     }
+    public List<Genero> getGenerosDisponibles() {
+
+        List<Genero> generosDisponibles = new ArrayList<>();
+        for(Genero genero: generos){
+            if(genero.isDisponible()){
+                generosDisponibles.add(genero);
+            }
+        }
+        return generos;
+    }
 
     public void setGeneros(List<Genero> generos) {
         this.generos = generos;
+    }
+
+    public void removeGenero(Genero genero){
+        this.generos.remove(genero);
     }
 }
