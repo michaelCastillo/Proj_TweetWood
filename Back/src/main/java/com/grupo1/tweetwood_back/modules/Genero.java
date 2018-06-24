@@ -27,8 +27,6 @@ public class Genero {
     @ManyToMany
     @JsonIgnore
     @Nullable
-
-
     @JoinTable(name="peliculas_generos",joinColumns = @JoinColumn(name = "id_genero"), inverseJoinColumns = @JoinColumn(name = "id_pelicula"))
     private List<Pelicula> peliculas;
 
@@ -85,9 +83,15 @@ public class Genero {
         System.out.println("pelicula: "+pelicula.getNombre());
         if(peliculas == null){
             this.peliculas = new ArrayList<>();
-
         }
-        this.peliculas.add(pelicula);
+        for(Pelicula pelicula_: this.peliculas){
+            System.out.println("Pelicula_gen: "+pelicula_.getNombre());
+        }
+        if(!peliculas.contains(pelicula)){
+            System.out.println("No contiene la pelicula");
+            this.peliculas.add(pelicula);
+        }
 
     }
+
 }

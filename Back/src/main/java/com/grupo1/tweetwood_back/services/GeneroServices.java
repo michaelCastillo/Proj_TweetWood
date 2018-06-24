@@ -95,6 +95,13 @@ public class GeneroServices {
         return response;
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/deleteAll",method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteAll(){
+        this.generoRepository.deleteAll();
+    }
+
 
 
 }

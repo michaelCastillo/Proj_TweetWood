@@ -1,10 +1,12 @@
 package com.grupo1.tweetwood_back.modules;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.sql.ordering.antlr.GeneratedOrderByFragmentParser;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "peliculas")
@@ -30,7 +32,7 @@ public class Pelicula {
     @ManyToMany( mappedBy = "peliculas")
     private List<Genero> generos;
 
-    @OneToMany(mappedBy = "pelicula")
+    @OneToMany(mappedBy = "pelicula", cascade = CascadeType.ALL)
     private List<KeyWord> keywords;
 
     @OneToMany(mappedBy = "pelicula")
@@ -104,12 +106,37 @@ public class Pelicula {
         return generosDisponibles;
     }
 
+    public void addKeyWord(KeyWord keyWord){
+        this.keywords.add(keyWord);
+    }
+
 
     public void setGeneros(List<Genero> generos) {
+        //Los generos que entran son los que queremos mantener.
+
+        this.generos = null;
         this.generos = generos;
     }
 
+
+
     public void removeGenero(Genero genero){
         this.generos.remove(genero);
+    }
+
+    public void addGenero(Genero genero) {
+        for(Genero genero_:this.generos ){
+            System.out.println("id: "+genero_.getId());
+        }
+        if(!this.generos.contains(genero)){
+            this.generos.add(genero);
+            System.out.println("No contiene el genero");
+        }else{
+            System.out.println("Ya contiene el genero");
+        }
+    }
+
+    public void removeKeyWord(KeyWord keyWord) {
+        this.keywords.remove(keyWord);
     }
 }

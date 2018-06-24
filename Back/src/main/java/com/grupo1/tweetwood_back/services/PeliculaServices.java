@@ -8,15 +8,13 @@ import com.grupo1.tweetwood_back.repositories.GeneroRepository;
 import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
 import javafx.geometry.Pos;
+import javassist.compiler.ast.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/peliculas")
@@ -49,19 +47,24 @@ public class PeliculaServices {
     public Map<String,Object> createPeliculas(@RequestBody Pelicula pelicula){
         Map<String,Object> response = new HashMap<>();
         List<KeyWord> keyWords = pelicula.getKeywords();
+        Pelicula peliFromRepo;
         if(this.peliculaRepository.findPeliculaByNombre(pelicula.getNombre()) == null){
+
             for(Genero genero: pelicula.getGeneros()){
-                genero.addPelicula(pelicula);
+                Genero gen = this.generoRepository.findGeneroById(genero.getId());
+                System.out.println("Nombre: "+gen.getNombre());
+                pelicula.addGenero(gen);
+                gen.addPelicula(pelicula);
             }
             for(KeyWord key: keyWords){
                 System.out.println("Key: "+key.getPalabra());
                 key.setPelicula(pelicula);
             }
+            pelicula.setDisponible(true);
             Pelicula peli = this.peliculaRepository.save(pelicula);
-            this.generoRepository.saveAll(pelicula.getGeneros());
             this.keyWordRepository.saveAll(keyWords);
             response.put("status","Added");
-            response.put("pelicula",pelicula);
+            response.put("pelicula",peli);
         }else{
             response.put("status","Error, the movie exists");
             response.put("pelicula",pelicula);
@@ -191,6 +194,7 @@ public class PeliculaServices {
             peli.setDisponible(false);
             response.put("status","deleted");
             response.put("pelicula",peli);
+            this.peliculaRepository.save(peli);
         }else{
             response.put("status","Error: doesn't exist");
             response.put("pelicula",peli);
@@ -202,9 +206,50 @@ public class PeliculaServices {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public Map<String,Object> updatePelicula(@RequestBody Pelicula pelicula){
+    public Map<String,Object> updatePelicula(@RequestBody @Valid Pelicula pelicula){
         Pelicula peliculaFromRepo;
         Map<String,Object> response = new HashMap<>();
+
+        if((peliculaFromRepo = this.peliculaRepository.findPeliculaById(pelicula.getId())) != null){
+
+            //Si efectivamente la pelicula que se esta alterando existe.
+            for(KeyWord keyWord: peliculaFromRepo.getKeywords()){
+                keyWord.setPelicula(null);
+                pelicula.removeKeyWord(keyWord);
+                this.keyWordRepository.delete(keyWord);
+            }
+            for(KeyWord keyWord: pelicula.getKeywords()){
+                if(!this.keyWordRepository.existsKeyWordByPalabraAndAndPelicula(keyWord.getPalabra(),peliculaFromRepo)){
+                    keyWord.setPelicula(peliculaFromRepo);
+                    this.keyWordRepository.save(keyWord);
+                }else{
+                    System.out.println("La keyword ya Existe!");
+                }
+            }
+            pelicula.setKeywords(pelicula.getKeywords());
+            List<Genero> repoGeneros = peliculaFromRepo.getGeneros();
+            for(Genero repoGen: repoGeneros){
+                repoGen.removePelicula(peliculaFromRepo); //Se elimina la pelicula.
+                peliculaFromRepo.removeGenero(repoGen); //Se elimina el genero
+            }
+            for(Genero gen: pelicula.getGeneros()){
+                Genero generoFromRepo = this.generoRepository.findGeneroById(gen.getId());
+                generoFromRepo.addPelicula(peliculaFromRepo);
+                peliculaFromRepo.addGenero(generoFromRepo);
+            }
+
+            this.peliculaRepository.save(peliculaFromRepo);
+            response.put("status","updated");
+            response.put("pelicula",peliculaFromRepo);
+
+        }else{
+            response.put("status","Error, no existe");
+            response.put("pelicula",peliculaFromRepo);
+        }
+        return response;
+
+        /*
+
         if( (peliculaFromRepo = this.peliculaRepository.findPeliculaById(pelicula.getId()) )!= null){
             //Si existe la pelicula
             for(KeyWord keyword : pelicula.getKeywords()){
@@ -227,7 +272,7 @@ public class PeliculaServices {
         response.put("pelicula",peliculaFromRepo);
         return  response;
 
-
+        */
     }
 
 
