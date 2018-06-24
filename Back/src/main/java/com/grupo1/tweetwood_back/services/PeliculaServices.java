@@ -70,6 +70,21 @@ public class PeliculaServices {
 
     }
 
+
+    @CrossOrigin
+    @RequestMapping(value = "/disponibles",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Pelicula> getDisponibles(){
+        List<Pelicula> peliculas = this.peliculaRepository.findAll();
+        List<Pelicula> peliculasDisponibles = new ArrayList<>();
+        for(Pelicula peli: peliculas){
+            if(peli.isDisponible()){
+                peliculasDisponibles.add(peli);
+            }
+        }
+        return peliculasDisponibles;
+    }
+
     @CrossOrigin
     @RequestMapping(value = "/disponible",method = RequestMethod.PUT)
     @ResponseBody

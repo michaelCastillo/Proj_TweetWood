@@ -93,9 +93,7 @@ public class Pelicula {
     }
 
     public List<Genero> getGeneros() {
-        return generos;
-    }
-    public List<Genero> getGenerosDisponibles() {
+
 
         List<Genero> generosDisponibles = new ArrayList<>();
         for(Genero genero: generos){
@@ -103,8 +101,9 @@ public class Pelicula {
                 generosDisponibles.add(genero);
             }
         }
-        return generos;
+        return generosDisponibles;
     }
+
 
     public void setGeneros(List<Genero> generos) {
         this.generos = generos;
