@@ -67,7 +67,7 @@
           });
       },
       able(id){
-        axios.put('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos/setDisponible', {data:{id_genero:id}})
+        axios.put('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos/setDisponible', {id_genero:id})
         .then(response =>{
           console.log(response);
           alert("Habilitaste el género con ID: "+ id);

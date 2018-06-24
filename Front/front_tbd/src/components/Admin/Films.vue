@@ -16,7 +16,7 @@
             <hr>
             <h3>Películas existentes</h3>
             <v-flex v-for="film in films">
-              <v-card v-if = "film.diponible==true" width="300px" class="movie-card">
+              <v-card v-if = "film.disponible==true" width="300px" class="movie-card">
                   <v-card-title primary-title>
                       <div>
                           <h3 class="headline mb-0">{{film.nombre}}</h3>
@@ -80,7 +80,7 @@
         this.$router.push({name: 'new-film', params:{ id: id}});
       },
       able(id){
-        axios.put('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/disponible',{data:{id_pelicula:id}})
+        axios.put('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/disponible',{id_pelicula:id})
         .then(response =>{
           console.log(response);
           this.getFilms();

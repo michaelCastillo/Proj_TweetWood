@@ -23,7 +23,6 @@
         ></v-text-field>
         <h3>Géneros de la película</h3>
         <v-container fluid>
-          {{this.selected}}
           <v-flex v-for="genre in genres">
             <v-checkbox v-model="selected" :label=genre.nombre :value = genre.id></v-checkbox>
           </v-flex>
@@ -40,7 +39,7 @@
         ></v-text-field>
         <v-btn @click="add">Agregar Palabra</v-btn>
         <v-flex xl2 lg3 md6 sm12 xs12 class="words-box"v-for="(keyWord, index) in keyWords">
-          <v-card width="150px" class="movie-card">
+          <v-card width="300px" class="movie-card">
               <v-card-title secondary-title>
                   <div>
                       <h3 class="headline mb-0">{{keyWord}}</h3>
@@ -116,6 +115,8 @@
             axios.post(global_url,objPost)
             .then(response =>{
               console.log(response);
+              console.log("OBJPOST");
+              console.log(objPost);
               this.$router.push('/films-admin');
               alert(this.title+" agregada corectamente.");
             }).catch(error => {
@@ -133,6 +134,8 @@
             axios.put(put_url,objPost)
             .then(response =>{
               console.log(response);
+              console.log("OBJPOST");
+              console.log(objPost);
               this.$router.push('/films-admin');
               alert(this.title+" modificada corectamente.");
             }).catch(error => {
