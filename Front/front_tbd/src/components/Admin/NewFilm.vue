@@ -1,5 +1,5 @@
 <template>
-  <div id="app-home">
+  <v-app dark id="app-home">
     <v-container>
       <v-form v-if="film!=null" ref="form" v-model="valid" lazy-validation>
         <v-text-field
@@ -29,7 +29,7 @@
         <h3>Géneros de la película</h3>
         <v-container fluid>
           <v-flex v-for="genre in genres">
-            <v-checkbox v-model="selected" :label=genre.nombre :value = genre.id></v-checkbox>
+            <v-checkbox v-model="selected" :label="genre.nombre" :value = "genre.id"></v-checkbox>
           </v-flex>
         </v-container>
         <br>
@@ -66,7 +66,7 @@
       </v-form>
       <span v-else>Cargando...</span>
     </v-container>
-  </div>
+  </v-app>
 </template>
 
 <script>

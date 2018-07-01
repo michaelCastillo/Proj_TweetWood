@@ -6,12 +6,23 @@
                     <div class="movie-title">
                         <h1>{{film.nombre}}</h1>
                     </div>
-                    <div>
+                    <div v-if="this.film.img != null">
                         <img :src="poster+this.film.img"/>
                     </div>
                 </v-flex>
 
                 <v-flex xl8 lg8 md8 sm12 xs12 elevation-12 class="movie-info">
+                    <br>
+                    <h3>{{film.nombre}} géneros:</h3>
+                    <br>
+                    <hr>
+                    <br>
+                    <div v-for="genre in film.generos">
+                      {{genre.nombre}}: {{genre.valorizacion}}% de valoración en Twitter.
+                      <br>
+                    </div>
+                    <br>
+                    <hr>
                     <v-divider></v-divider>
                     <v-tabs dark slider-color="red">
                         <v-tab v-for="n in 4" :key="n" ripple>
@@ -19,22 +30,25 @@
                                 Tweets
                             </div>
                             <div v-if="n==2">
-                                Aprovación
+                                Valoración
                             </div>
                             <div v-if="n==3">
-                                Aprovación histórica
+                                Valoración histórica
                             </div>
                             <div v-if="n==4">
-                              Otro
+                              Tweets en el tiempo
                             </div>
-
                         </v-tab>
                         <v-tab-item v-for="n in 4" :key="n">
                             <div v-if="n==1">
                               <div align="center" v-for="tweet in tweetList">
                                 <Tweet :id="tweet"></Tweet>
                               </div>
-                              <h3>Tweets Totales: {{film.numTweets}}</h3>
+                              <br>
+                              <hr>
+                              <br>
+                              <h3>Tweets Totales sobre {{film.nombre}}: {{film.numTweets}}</h3>
+                              <br>
                             </div>
                             <div v-if="n==2">
                               <CommitChart
@@ -46,8 +60,12 @@
                             </div>
                             <div v-if="n==4">
                               <LineChart :chart-data="datacollectionLine2"></LineChart>
-                              <span>Pick Tweets : {{maxTweet}}  </span>
-                              <span>Fecha: {{dateMaxTweet}}</span>
+                              <br>
+                              <hr>
+                              <br>
+                              <h3>Pick Tweets : {{maxTweet}}  </h3>
+                              <h3>Fecha: {{dateMaxTweet}}</h3>
+                              <br>
 
                             </div>
                         </v-tab-item>

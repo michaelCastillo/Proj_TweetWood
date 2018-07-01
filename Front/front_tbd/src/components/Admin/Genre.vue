@@ -1,8 +1,8 @@
 <template>
-  <div id="app-home">
+  <v-app dark id="app-home">
     <v-container>
       <h1>Géneros</h1>
-      <v-card color = "green accent-2" width="300px" class="movie-card" hover :to="{name: 'new-genre', params:{ id: -1}}">
+      <v-card color = "green accent-4" width="300px" class="movie-card" hover :to="{name: 'new-genre', params:{ id: -1}}">
         <v-card-title primary-title>
             <div>
                 <h3 class="headline mb-0">Nuevo género</h3>
@@ -38,7 +38,7 @@
         <br>
       </v-flex>
     </v-container>
-  </div>
+  </v-app>
 </template>
 
 <script>

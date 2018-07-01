@@ -5,7 +5,7 @@
             <br>
             <hr>
             <h3>Agregar película</h3>
-            <v-card color = "green accent-2" width="300px" class="movie-card" hover :to="{name: 'new-film', params:{id: this.def}}">
+            <v-card color = "green accent-4" width="300px" class="movie-card" hover :to="{name: 'new-film', params:{id: this.def}}">
               <v-card-title primary-title>
                   <div>
                       <h3 class="headline mb-0">Nueva Película</h3>
