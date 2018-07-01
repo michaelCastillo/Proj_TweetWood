@@ -7,6 +7,11 @@
           label="Título"
           required
         ></v-text-field>
+        <v-text-field
+          v-model="url"
+          label="Url Imagen"
+          required
+        ></v-text-field>
         <h3>Restricción</h3>
         <v-radio-group v-model="row" row>
           <v-radio label="Libre" color="green darken-1" value="Libre" ></v-radio>
@@ -17,8 +22,8 @@
           <v-radio label="+18"  color="grey darken-4" value="+18"></v-radio>
         </v-radio-group>
         <v-text-field
-          v-model="url_img"
-          label="Url Imagen"
+          v-model="id_api"
+          label="Id API"
           required
         ></v-text-field>
         <h3>Géneros de la película</h3>
@@ -71,7 +76,8 @@
       valid: true,
       title: '',
       genre: '',
-      url_img: '',
+      id_api: '',
+      url: '',
       newWord: null,
       keyWords: [],
       film: null,
@@ -109,6 +115,8 @@
             let objPost = {
               nombre: this.title,
               restriccion:this.row,
+              idApi: this.id_api,
+              img: this.url,
               generos: genresList,
               keywords: keywordsList
             };
@@ -128,6 +136,7 @@
               id: this.id,
               nombre: this.title,
               restriccion:this.row,
+              idApi: this.id_api,
               generos: genresList,
               keywords: keywordsList
             };
@@ -149,8 +158,10 @@
         this.keyWords = [];
       },
       add(){
-        this.keyWords.unshift(this.newWord);
-        this.newWord = null;
+        if(this.newWord!=null){
+          this.keyWords.unshift(this.newWord);
+          this.newWord = null;
+        }
       },
       pop(index){
         this.keyWords.splice(index,1);
@@ -161,10 +172,11 @@
                   this.film = film.data;
                   this.title = this.film.nombre;
                   this.restriction = this.film.restriccion;
+                  this.id_api = this.film.idApi;
+                  this.url = this.film.img;
                   this.film.keywords.map(keyword =>{
                     this.keyWords.push(keyword.palabra);
                   });
-                  //this.selected = this.film.generos;
                   this.loadCheckbox();
                   this.row = this.film.restriccion;
               });

@@ -10,9 +10,13 @@
   "dependencies": {
     "@mdi/font": "^2.3.54",
     "axios": "^0.18.0",
+    "chart.js": "^2.7.2",
     "material-design-icons-iconfont": "^3.0.3",
+    "npm": "^6.1.0",
     "vue": "^2.5.16",
+    "vue-chartjs": "^3.3.2",
     "vue-router": "^3.0.1",
+    "vue-tweet-embed": "^2.1.1",
     "vuetify": "^1.0.18"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 <template>
-    <div id="app-home">
+    <v-app dark id="app-home">
         <v-container>
             <h1> Administrador </h1>
             <v-card width="300px" class="movie-card" hover :to="{name: 'films-admin'}">
@@ -17,7 +17,7 @@
               </v-card-title>
             </v-card>
         </v-container>
-    </div>
+    </v-app>
 </template>
 
 <script>

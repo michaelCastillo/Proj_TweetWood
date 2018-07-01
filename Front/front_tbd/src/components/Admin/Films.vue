@@ -1,5 +1,5 @@
 <template>
-    <div id="app-home">
+    <v-app dark id="app-home">
         <v-container>
             <h2>Películas</h2>
             <br>
@@ -13,10 +13,14 @@
               </v-card-title>
             </v-card>
             <br>
+            <v-btn color="orange" @click="anadirApi()">Añadir películas API</v-btn>
+            <v-btn color="red" @click="delAll()">Eliminar Todo</v-btn>
+            <v-btn color="blue" @click="startLucene()">Start Lucene</v-btn>
+            <br>
             <hr>
             <h3>Películas existentes</h3>
             <v-flex v-for="film in films">
-              <v-card v-if = "film.disponible==true" width="300px" class="movie-card">
+              <v-card v-if = "film.disponible==true" width="300px" class="movie-card" @click="anadirApi()">
                   <v-card-title primary-title>
                       <div>
                           <h3 class="headline mb-0">{{film.nombre}}</h3>
@@ -41,7 +45,7 @@
               <br>
             </v-flex>
         </v-container>
-    </div>
+    </v-app>
 </template>
 
 <script>
@@ -86,6 +90,48 @@
           this.getFilms();
         }).catch(error => {
           console.log(error);
+        });
+      },
+      anadirApi(){
+        axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=7917990738a6b09dbb79384b066eca6b')
+            .then((pelis)=>{
+              pelis.data.results.map(peli =>{
+                let obj={
+                  nombre: peli.title,
+                  restriccion:"",
+                  idApi: peli.id,
+                  img: peli.poster_path,
+                  fiveTweets: "",
+                  generos: [],
+                  keywords: [{palabra:peli.title}]
+                }
+                axios.post('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear',obj)
+                .then(response =>{
+                  console.log(obj);
+                }).catch(error => {
+                  console.log(error);
+                });
+              });
+              this.getFilms();
+            });
+      },
+      delAll(){
+        axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/keywords/deleteAll')
+            .then((pelis)=>{
+              axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/deleteAll')
+                  .then((pelis)=>{
+                    this.getFilms();
+                  }).catch(error => {
+                    console.log(error);
+                  });
+            }).catch(error => {
+              console.log(error);
+            });
+      },
+      startLucene(){
+        axios.post('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/lucene/start')
+        .then(response=>{
+          console.log(response);
         });
       }
     }
