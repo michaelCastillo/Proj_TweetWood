@@ -21,7 +21,7 @@ public class Genero {
     private Long id;
 
     private String nombre;
-    private int valorizacion;
+    private Double valorizacion;
     private boolean disponible;
 
     @ManyToMany
@@ -71,11 +71,11 @@ public class Genero {
         this.nombre = nombre;
     }
 
-    public int getValorizacion() {
+    public Double getValorizacion() {
         return valorizacion;
     }
 
-    public void setValorizacion(int valorizacion) {
+    public void setValorizacion(Double valorizacion) {
         this.valorizacion = valorizacion;
     }
 

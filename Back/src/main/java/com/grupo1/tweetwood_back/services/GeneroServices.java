@@ -6,6 +6,7 @@ import com.grupo1.tweetwood_back.modules.Pelicula;
 import com.grupo1.tweetwood_back.repositories.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.security.x509.GeneralName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,6 +101,15 @@ public class GeneroServices {
     @ResponseBody
     public void deleteAll(){
         this.generoRepository.deleteAll();
+    }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "{id}/getMovies",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Pelicula> getPeliculas(@PathVariable Long id){
+        Genero genero = this.generoRepository.findGeneroById(id);
+        return genero.getPeliculas();
     }
 
 

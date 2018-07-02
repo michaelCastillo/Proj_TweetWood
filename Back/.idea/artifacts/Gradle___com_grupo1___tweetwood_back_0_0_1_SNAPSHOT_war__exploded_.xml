@@ -17,14 +17,19 @@
           <element id="dir-copy" path="$PROJECT_DIR$/out/production/resources" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-queryparser:7.3.1" />
+          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-core:7.3.1" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-data-jpa:2.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-web:2.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-json:2.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.3" />
+          <element id="library" level="project" name="Gradle: org.apache.opennlp:opennlp-tools:1.8.4" />
+          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-queries:7.3.1" />
+          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-sandbox:7.3.1" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-aop:2.0.2.RELEASE" />
+          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.46" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:2.0.2.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.boot:spring-boot-starter:2.0.2.RELEASE" />
-          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.46" />
           <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:5.2.17.Final" />
           <element id="library" level="project" name="Gradle: javax.transaction:javax.transaction-api:1.2" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-jpa:2.0.7.RELEASE" />
@@ -73,6 +78,13 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-jcl:5.0.6.RELEASE" />
           <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.2.3" />
           <element id="library" level="project" name="Gradle: org.apache.logging.log4j:log4j-api:2.10.0" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-data-mongodb/2.0.2.RELEASE/b7ea7325e4609728db2da641c5071d7a9972c4f/spring-boot-starter-data-mongodb-2.0.2.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.twitter4j/twitter4j-stream/4.0.2/c8ba9a8013b7e1d01a4ee9066d681a228bbb05/twitter4j-stream-4.0.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver/3.6.3/d462fcc4640ac69b35e7cd2491e992c6bdf82862/mongodb-driver-3.6.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.data/spring-data-mongodb/2.0.7.RELEASE/e5c5d40d4dce7ce909e1dce87baddeeba934e1f0/spring-data-mongodb-2.0.7.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.twitter4j/twitter4j-core/4.0.2/6555e7c45f5db0006823731b2ddb536d481e11d1/twitter4j-core-4.0.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/mongodb-driver-core/3.6.3/f2c41ad5349cdb65a6f7bde16f5ebae9a0dbe5f5/mongodb-driver-core-3.6.3.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mongodb/bson/3.6.3/6c85ddf1fc96eb8776213bef6665d005a564ecd3/bson-3.6.3.jar" />
         </element>
       </element>
     </root>

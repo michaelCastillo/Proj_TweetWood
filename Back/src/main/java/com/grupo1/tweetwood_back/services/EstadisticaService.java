@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,24 +19,22 @@ public class EstadisticaService {
     @Autowired
     private PeliculaRepository peliculaRepository;
 
-    @CrossOrigin
+
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public List<Estadistica> getEstadistica(){
         return this.estadisticaRepository.findAll();
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Estadistica getEstadisticaById(@PathVariable Long id){
         return this.getEstadisticaById(id);
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/create/{id_pelicula}", method = RequestMethod.POST)
     @ResponseBody
-    public Estadistica createEstadistica(  @PathVariable Long id_pelicula ,@RequestBody @Valid Estadistica estadistica){
+    public Estadistica createEstadistica(@PathVariable Long id_pelicula , @RequestBody @Valid Estadistica estadistica){
 
         Pelicula pelicula = peliculaRepository.findPeliculaById(id_pelicula);
         List<Estadistica> estadisticas = pelicula.getEstadisticas();

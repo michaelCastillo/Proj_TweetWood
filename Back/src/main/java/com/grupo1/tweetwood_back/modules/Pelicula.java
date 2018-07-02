@@ -17,9 +17,14 @@ public class Pelicula {
     @Column(name = "id")
     private Long id;
 
+    private String fiveTweets;
+    private Long numTweets;
+    private Long idApi;
     private String nombre;
     private String restriccion;
+    private String img;
     private boolean disponible;
+    private Double value;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     @JsonIgnore
@@ -38,16 +43,78 @@ public class Pelicula {
     @OneToMany(mappedBy = "pelicula")
     private List<Estadistica> estadisticas;
 
+
+
     public List<Estadistica> getEstadisticas() {
         return estadisticas;
+    }
+
+    public Double getValue() {
+        return value;
+    }
+
+    public void setValue(Double value) {
+        this.value = value;
     }
 
     public boolean isDisponible() {
         return disponible;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public String getFiveTweets() {
+        return this.fiveTweets;
+    }
+    public void setFiveTweets(String fiveTweets){
+        this.fiveTweets = fiveTweets;
+    }
+
+    public void fiveTweets(List<String> fiveTweets) {
+        String aux = "";
+        for(int x = 0; x<fiveTweets.size(); x++){
+            if(x==(fiveTweets.size()-1)){
+                aux+=fiveTweets.get(x);
+            }else{
+                System.out.println("fiveTweet: "+fiveTweets.get(x));
+                aux+=fiveTweets.get(x)+"|";
+            }
+        }
+        this.fiveTweets = aux;
+        System.out.println(aux);
+    }
+
+    public void tweetSet(int index, String id) {
+        String[] ids = this.fiveTweets.split("|");
+        ids[index] = id;
+        String aux = "";
+        for (int x = 0; x < ids.length; x++) {
+            if (x == (ids.length-1)) {
+                aux += ids[x];
+            } else {
+                aux += ids[x] + "|";
+            }
+        }
+        this.fiveTweets = aux;
+        System.out.println(aux);
+    }
+
+    public Long getNumTweets() {
+        return numTweets;
+    }
+
+    public void setNumTweets(Long numTweets) {
+        this.numTweets = numTweets;
     }
 
     public void setEstadisticas(List<Estadistica> estadisticas) {
@@ -92,6 +159,14 @@ public class Pelicula {
 
     public void setRestriccion(String restriccion) {
         this.restriccion = restriccion;
+    }
+
+    public Long getIdApi() {
+        return idApi;
+    }
+
+    public void setIdApi(Long idApi) {
+        this.idApi = idApi;
     }
 
     public List<Genero> getGeneros() {

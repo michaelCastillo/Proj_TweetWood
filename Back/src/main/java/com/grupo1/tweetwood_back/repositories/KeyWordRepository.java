@@ -10,4 +10,5 @@ public interface KeyWordRepository extends JpaRepository<KeyWord, Long> {
     public KeyWord findKeyWordById(Long id);
     public boolean existsKeyWordByPalabra(String palabra);
     public boolean existsKeyWordByPalabraAndAndPelicula(String keyword, Pelicula pelicula);
+    public KeyWord findKeyWordByPalabraAndPelicula(String palabra, Pelicula pelicula);
 }

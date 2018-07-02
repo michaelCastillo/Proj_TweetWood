@@ -19,11 +19,25 @@ public class Estadistica {
     private Date fecha;
     private float aprobacion;
     private String localizacion;
+    private Long numTweets;
+
+    public Estadistica(){
+        this.fecha = new Date();
+    }
+
 
     @ManyToOne
     @JoinColumn(name = "id_pelicula_estadistica")
     @JsonIgnore
     private Pelicula pelicula;
+
+    public Long getNumTweets() {
+        return numTweets;
+    }
+
+    public void setNumTweets(Long numTweets) {
+        this.numTweets = numTweets;
+    }
 
     public Long getId() {
         return id;

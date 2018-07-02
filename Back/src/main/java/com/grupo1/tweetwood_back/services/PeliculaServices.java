@@ -1,9 +1,11 @@
 package com.grupo1.tweetwood_back.services;
 
 
+
 import com.grupo1.tweetwood_back.modules.Genero;
 import com.grupo1.tweetwood_back.modules.KeyWord;
 import com.grupo1.tweetwood_back.modules.Pelicula;
+import com.grupo1.tweetwood_back.modules.Tweet;
 import com.grupo1.tweetwood_back.repositories.GeneroRepository;
 import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.*;
 
 @RestController
@@ -206,81 +209,154 @@ public class PeliculaServices {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
     @ResponseBody
-    public Map<String,Object> updatePelicula(@RequestBody @Valid Pelicula pelicula){
+    public Map<String,Object> updatePelicula(@RequestBody Pelicula pelicula){
         Pelicula peliculaFromRepo;
         Map<String,Object> response = new HashMap<>();
-
-        if((peliculaFromRepo = this.peliculaRepository.findPeliculaById(pelicula.getId())) != null){
-
-            //Si efectivamente la pelicula que se esta alterando existe.
-            for(KeyWord keyWord: peliculaFromRepo.getKeywords()){
-                keyWord.setPelicula(null);
-                pelicula.removeKeyWord(keyWord);
-                this.keyWordRepository.delete(keyWord);
-            }
-            for(KeyWord keyWord: pelicula.getKeywords()){
-                if(!this.keyWordRepository.existsKeyWordByPalabraAndAndPelicula(keyWord.getPalabra(),peliculaFromRepo)){
-                    keyWord.setPelicula(peliculaFromRepo);
-                    this.keyWordRepository.save(keyWord);
-                }else{
-                    System.out.println("La keyword ya Existe!");
-                }
-            }
-            pelicula.setKeywords(pelicula.getKeywords());
-            List<Genero> repoGeneros = peliculaFromRepo.getGeneros();
-            for(Genero repoGen: repoGeneros){
-                repoGen.removePelicula(peliculaFromRepo); //Se elimina la pelicula.
-                peliculaFromRepo.removeGenero(repoGen); //Se elimina el genero
-            }
-            for(Genero gen: pelicula.getGeneros()){
-                Genero generoFromRepo = this.generoRepository.findGeneroById(gen.getId());
-                generoFromRepo.addPelicula(peliculaFromRepo);
-                peliculaFromRepo.addGenero(generoFromRepo);
-            }
-
-            this.peliculaRepository.save(peliculaFromRepo);
-            response.put("status","updated");
-            response.put("pelicula",peliculaFromRepo);
-
-        }else{
-            response.put("status","Error, no existe");
-            response.put("pelicula",peliculaFromRepo);
+        Pelicula peli = this.peliculaRepository.findPeliculaById(pelicula.getId());
+        peli.setNombre(pelicula.getNombre());
+        peli.setRestriccion(pelicula.getRestriccion());
+        peli.setIdApi(pelicula.getIdApi());
+        if(pelicula.getImg() != "") {
+            peli.setImg(pelicula.getImg());
         }
+        List<KeyWord> keysToAdd = new ArrayList<>();
+        List<KeyWord> keysFromFront = pelicula.getKeywords();
+        for(KeyWord key: peli.getKeywords()){
+            key.setPelicula(null);
+        }
+        for(int x = 0; x<keysFromFront.size(); x++){
+            KeyWord actualKey = keysFromFront.get(x);
+            if(this.keyWordRepository.existsKeyWordByPalabraAndAndPelicula(actualKey.getPalabra(),peli)){
+                System.out.println("Existe aqui");
+                KeyWord keyToAdd =this.keyWordRepository.findKeyWordByPalabraAndPelicula(actualKey.getPalabra(),peli);
+                keyToAdd.setPelicula(peli);
+                keysToAdd.add(keyToAdd);
+            }else{
+                System.out.println("else");
+                actualKey.setPelicula(peli);
+                keysToAdd.add(this.keyWordRepository.save(actualKey));
+
+            }
+        }
+        //Se quitan aquellas que no estan en la consulta.
+
+        peli.setKeywords(keysToAdd);
+        //Se procesan los generos
+        //Se quitan todos los generos.
+        for(Genero gen: peli.getGeneros()){
+            gen.removePelicula(peli);
+        }
+        peli.setGeneros(null);
+        //Se toman los generos que existen.
+        List<Genero> generosToAdd = new ArrayList<>();
+        for(Genero gen: pelicula.getGeneros()){
+            Genero genFromRepo =this.generoRepository.findGeneroById(gen.getId());
+            genFromRepo.addPelicula(peli);
+            generosToAdd.add(genFromRepo);
+        }
+        peli.setGeneros(generosToAdd);
+
+
+        this.peliculaRepository.save(peli);
+        response.put("pelicula",peli);
+
+
+
+//
+//        if((peliculaFromRepo = this.peliculaRepository.findPeliculaById(pelicula.getId())) != null){
+//
+//            //Si efectivamente la pelicula que se esta alterando existe.
+//            //updateKeywords
+//            List<KeyWord> keyWords = peliculaFromRepo.getKeywords();
+//            for(int x = 0; x<pelicula.getKeywords().size(); x++){
+//                for(int y=0; y<keyWords.size(); y++){
+//                    if(keyWords.get(y).getPalabra().compareTo(pelicula.getKeywords().get(x).getPalabra()) == 0){
+//                        //Si la keyword ya existe
+//
+//
+//                    }
+//                }
+//            }
+//
+//
+//
+//            for(KeyWord keyWord: pelicula.getKeywords()){
+//                if(!this.keyWordRepository.existsKeyWordByPalabraAndAndPelicula(keyWord.getPalabra(),peliculaFromRepo)){
+//                    keyWord.setPelicula(peliculaFromRepo);
+//                    this.keyWordRepository.save(keyWord);
+//                }else{
+//                    System.out.println("La keyword ya Existe!");
+//                }
+//            }
+//            pelicula.setKeywords(pelicula.getKeywords());
+//            List<Genero> repoGeneros = peliculaFromRepo.getGeneros();
+//            for(Genero repoGen: repoGeneros){
+//                repoGen.removePelicula(peliculaFromRepo); //Se elimina la pelicula.
+//                peliculaFromRepo.removeGenero(repoGen); //Se elimina el genero
+//            }
+//            for(Genero gen: pelicula.getGeneros()){
+//                Genero generoFromRepo = this.generoRepository.findGeneroById(gen.getId());
+//                generoFromRepo.addPelicula(peliculaFromRepo);
+//                peliculaFromRepo.addGenero(generoFromRepo);
+//            }
+//            peliculaFromRepo.setNombre(pelicula.getNombre());
+//            peliculaFromRepo.setRestriccion(pelicula.getRestriccion());
+//
+//            this.peliculaRepository.save(peliculaFromRepo);
+//            response.put("status","updated");
+//            response.put("pelicula",peliculaFromRepo);
+//
+//        }else{
+//            response.put("status","Error, no existe");
+//            response.put("pelicula",peliculaFromRepo);
+//        }
         return response;
 
-        /*
 
-        if( (peliculaFromRepo = this.peliculaRepository.findPeliculaById(pelicula.getId()) )!= null){
-            //Si existe la pelicula
-            for(KeyWord keyword : pelicula.getKeywords()){
-                System.out.println("Keyword: "+keyword.getPalabra());
-                keyword.setPelicula(peliculaFromRepo);
-            }
-            //Se guardan los generos
-            for(Genero genero: pelicula.getGeneros()){
-                System.out.println("genero: "+genero.getNombre());
-                genero.addPelicula(pelicula);
-            }
-            //Se guardan las keywords
-            this.generoRepository.saveAll(pelicula.getGeneros());
-            this.keyWordRepository.saveAll(pelicula.getKeywords());
-            this.peliculaRepository.save(pelicula);
-            response.put("status","OK! updated");
-        }else{
-            response.put("status","Error not updated");
-        }
-        response.put("pelicula",peliculaFromRepo);
-        return  response;
-
-        */
     }
 
 
+    @CrossOrigin
+    @RequestMapping(value = "/mostValuated",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Pelicula> getMostValuated(){
+        List<Pelicula> peliculas = this.peliculaRepository.findAll();
+        List<Pelicula> peliculasResponse = new ArrayList<>();
+        //Se ordena
+        Collections.sort(peliculas,new SortByValuePelicula());
+        for(int x = 0; (x<peliculas.size() && x<10); x++){
+            peliculasResponse.add(peliculas.get(x));
+        }
+        return peliculasResponse;
+    }
 
-
-
-
-
+    @CrossOrigin
+    @RequestMapping(value = "/mostTweeted",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Pelicula> getMostTweets(){
+        List<Pelicula> peliculas = this.peliculaRepository.findAll();
+        List<Pelicula> peliculasResponse = new ArrayList<>();
+        Collections.sort(peliculas,new SortByNumTweets());
+        for(int x = 0; ( x<10 && x<peliculas.size()); x++){
+            peliculasResponse.add(peliculas.get(x));
+        }
+        return peliculasResponse;
+    }
 
 
 }
+class SortByValuePelicula implements Comparator<Pelicula>{
+
+    @Override
+    public int compare(Pelicula o1, Pelicula o2) {
+        return (o2.getValue().intValue() - o1.getValue().intValue());
+    }
+}
+class SortByNumTweets implements Comparator<Pelicula>{
+
+    @Override
+    public int compare(Pelicula o1, Pelicula o2) {
+        return o2.getNumTweets().intValue() - o1.getNumTweets().intValue();
+    }
+}
+
