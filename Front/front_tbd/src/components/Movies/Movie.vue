@@ -9,6 +9,9 @@
                     <div v-if="this.film.img != null">
                         <img :src="poster+this.film.img"/>
                     </div>
+                    <div v-else>
+                        <h3>Imagen no se encuentra disponible.</h3>
+                    </div>
                     <div class="movie-sinopsis">
                         <h3>Reseña</h3>
                         <p>{{sinopsis}}</p>
@@ -152,7 +155,7 @@
                         labels: labelList,
                         datasets: [
                           {
-                            label: 'Aprovación histórica',
+                            label: 'Aprobación histórica',
                             backgroundColor: '#f87979',
                             data: dataList
                           }
@@ -184,8 +187,8 @@
 </script>
 
 <style scoped>
-    .movie {
-
+    #movie {
+        text-align: center;
     }
     .movie-picture {
         /*margin: 10px 10px;*/

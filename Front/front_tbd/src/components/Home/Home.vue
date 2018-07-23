@@ -114,10 +114,11 @@
 </script>
 <style scoped>
   .bar-chart {
-    background-color: white;
+    /* background-color: white; */
   }
 
   .app-home-container {
     background-color: #303030;
+    width: 100%;
   }
 </style>
