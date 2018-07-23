@@ -12,13 +12,12 @@
 
 <script>
 import AppNav from './components/Layout/Nav.vue'
-import AppHome from './components/Home/Home.vue'
 import AppFooter from './components/Layout/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    AppNav, AppHome, AppFooter
+    AppNav, AppFooter
   }
 }
 </script>
@@ -30,7 +29,8 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    /* padding: 0px 0px; */
+
     background-color: #ededed;
 }
 </style>

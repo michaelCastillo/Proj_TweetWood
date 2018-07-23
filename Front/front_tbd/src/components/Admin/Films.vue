@@ -19,7 +19,7 @@
             <br>
             <hr>
             <h3>Películas existentes</h3>
-            <v-flex v-for="film in films">
+            <v-flex v-for="film in films" :key="film.id">
               <v-card v-if = "film.disponible==true" width="300px" class="movie-card" @click="anadirApi()">
                   <v-card-title primary-title>
                       <div>
@@ -106,9 +106,10 @@
                   keywords: [{palabra:peli.title}]
                 }
                 axios.post('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear',obj)
-                .then(response =>{
-                  console.log(obj);
-                }).catch(error => {
+                // .then(response =>{
+                //   console.log(obj);
+                // })
+                .catch(error => {
                   console.log(error);
                 });
               });
@@ -117,9 +118,9 @@
       },
       delAll(){
         axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/keywords/deleteAll')
-            .then((pelis)=>{
+            .then(()=>{
               axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/deleteAll')
-                  .then((pelis)=>{
+                  .then(()=>{
                     this.getFilms();
                   }).catch(error => {
                     console.log(error);

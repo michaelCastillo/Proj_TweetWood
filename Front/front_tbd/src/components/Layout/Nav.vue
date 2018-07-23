@@ -24,10 +24,6 @@
             <v-toolbar-side-icon v-on:click="drawer=!drawer" ></v-toolbar-side-icon>
             <v-toolbar-title class="app-title">TweetWood</v-toolbar-title>
             <v-spacer></v-spacer>
-            <!--<v-toolbar-items class="hidden-sm-and-down">-->
-                <!--<v-btn flat><v-icon>account_circle</v-icon></v-btn>-->
-                <!--<v-btn flat><v-icon>settings</v-icon></v-btn>-->
-            <!--</v-toolbar-items>-->
         </v-toolbar>
 
     </div>
@@ -47,6 +43,6 @@
 
 <style>
     .app-title {
-        padding-left: 600px;
+        
     }
 </style>

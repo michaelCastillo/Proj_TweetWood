@@ -1,7 +1,7 @@
 <template>
     <v-app dark id="app-movies">
         <v-layout row wrap>
-            <v-flex xl2 lg3 md6 sm12 xs12 class="movie-box" v-for="film in films">
+            <v-flex xl2 lg3 md6 sm12 xs12 class="movie-box" v-for="film in films" :key="film.id">
                 <v-card width="300px" class="movie-card" hover :to="{name: 'film', params:{ id: film.id }}">
                     <v-card-media :src="img+film.img" height="185px">
                     </v-card-media>
