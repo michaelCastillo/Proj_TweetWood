@@ -28,7 +28,7 @@
         ></v-text-field>
         <h3>Géneros de la película</h3>
         <v-container fluid>
-          <v-flex v-for="genre in genres">
+          <v-flex v-for="genre in genres" :key="genre.id">
             <v-checkbox v-model="selected" :label="genre.nombre" :value = "genre.id"></v-checkbox>
           </v-flex>
         </v-container>
@@ -43,7 +43,7 @@
           required
         ></v-text-field>
         <v-btn @click="add">Agregar Palabra</v-btn>
-        <v-flex xl2 lg3 md6 sm12 xs12 class="words-box"v-for="(keyWord, index) in keyWords">
+        <v-flex xl2 lg3 md6 sm12 xs12 class="words-box" v-for="(keyWord, index) in keyWords" :key="index">
           <v-card width="300px" class="movie-card">
               <v-card-title secondary-title>
                   <div>

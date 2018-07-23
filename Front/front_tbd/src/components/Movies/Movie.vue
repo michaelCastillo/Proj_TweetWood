@@ -9,15 +9,19 @@
                     <div v-if="this.film.img != null">
                         <img :src="poster+this.film.img"/>
                     </div>
+                    <div v-else>
+                        <h3>Imagen no se encuentra disponible.</h3>
+                    </div>
+                    <div class="movie-sinopsis">
+                        <h3>Reseña</h3>
+                        <p>{{sinopsis}}</p>
+                    </div>
                 </v-flex>
 
-                <v-flex xl8 lg8 md8 sm12 xs12 elevation-12 class="movie-info">
+                <v-flex xl7 offset-xl1 lg7 offset-lg1 md7 offset-md1 sm12 xs12 elevation-12 class="movie-info">
+                    <h3>Géneros</h3>
                     <br>
-                    <h3>{{film.nombre}} géneros:</h3>
-                    <br>
-                    <hr>
-                    <br>
-                    <div v-for="genre in film.generos">
+                    <div v-for="genre in film.generos" :key="genre.id">
                       {{genre.nombre}}: {{genre.valorizacion}}% de valoración en Twitter.
                       <br>
                     </div>
@@ -41,24 +45,25 @@
                         </v-tab>
                         <v-tab-item v-for="n in 4" :key="n">
                             <div v-if="n==1">
-                              <div align="center" v-for="tweet in tweetList">
+                              <div align="center" v-for="tweet in tweetList" :key="tweet.id">
                                 <Tweet :id="tweet"></Tweet>
                               </div>
                               <br>
                               <hr>
                               <br>
-                              <h3>Tweets Totales sobre {{film.nombre}}: {{film.numTweets}}</h3>
+                              <h3>Tweets totales sobre {{film.nombre}}: {{film.numTweets}}</h3>
                               <br>
                             </div>
-                            <div v-if="n==2">
+                            <div v-if="n==2" class="size-chart">
                               <CommitChart
-                              :chart-data="datacollectionPie">
+                                :chart-data="datacollectionPie"
+                              >
                               </CommitChart>
                             </div>
-                            <div v-if="n==3">
+                            <div v-if="n==3" class="size-chart">
                               <LineChart :chart-data="datacollectionLine"></LineChart>
                             </div>
-                            <div v-if="n==4">
+                            <div v-if="n==4" class="size-chart">
                               <LineChart :chart-data="datacollectionLine2"></LineChart>
                               <br>
                               <hr>
@@ -72,10 +77,10 @@
                     </v-tabs>
                 </v-flex>
 
-                <v-flex xl12 lg12 md12 sm12 xs12 class="graph" elevation-12>
+                <!-- <v-flex xl12 lg12 md12 sm12 xs12 class="graph" elevation-12>
                     <p>Reseña</p>
 
-                </v-flex>
+                </v-flex> -->
             </v-layout>
             <span v-else>Cargando...</span>
         </v-container>
@@ -101,6 +106,7 @@
                 id: null,
                 film: null,
                 poster: 'https://image.tmdb.org/t/p/w342/',
+                sinopsis: 'After their reclusive grandmother passes away, the Graham family begins to unravel cryptic and increasingly terrifying secrets about their ancestry. The more they discover, the more they find themselves trying to outrun the sinister fate they seem to have inherited.',
                 datacollectionPie: null,
                 datacollectionLine: null,
                 datacollectionLine2: null,
@@ -149,7 +155,7 @@
                         labels: labelList,
                         datasets: [
                           {
-                            label: 'Aprovación histórica',
+                            label: 'Aprobación histórica',
                             backgroundColor: '#f87979',
                             data: dataList
                           }
@@ -159,7 +165,7 @@
                         labels: labelList2,
                         datasets: [
                           {
-                            label: 'Otro',
+                            label: 'Tweets',
                             backgroundColor: '#900C3F',
                             data: dataList2
                           }
@@ -181,19 +187,21 @@
 </script>
 
 <style scoped>
-    .movie {
-
+    #movie {
+        text-align: center;
     }
     .movie-picture {
         /*margin: 10px 10px;*/
-        border: 1px solid #efefef;
-        border-radius: 10px;
+        border: 1px solid #303030;
+        border-radius: 5px;
+        background-color: #252525;
     }
 
     .movie-info {
-        /*margin: 10px 10px;*/
-        border: 1px solid #efefef;
-        border-radius: 10px;
+        padding-top: 10px;
+        border: 1px solid #303030;
+        background-color: #252525;
+        border-radius: 5px;
     }
 
     .movie-title {
@@ -204,6 +212,18 @@
         text-align: justify;
     }
 
+    .movie-sinopsis {
+        text-align: center;
+    }
+
+    .movie-sinopsis h3 {
+        padding: 10px 0px;
+    }
+
+    .movie-sinopsis p {
+        padding: 10px 15px;
+    }
+
     .movie-overview h4 {
         text-align: center;
     }
@@ -212,5 +232,11 @@
 
         border: 1px solid #efefef;
         border-radius: 10px;
+    }
+
+    .size-chart {
+        margin: 5px auto;
+        width: 550px;
+        /* color: white; */
     }
 </style>

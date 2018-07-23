@@ -12,25 +12,25 @@
 
 <script>
 import AppNav from './components/Layout/Nav.vue'
-import AppHome from './components/Home/Home.vue'
 import AppFooter from './components/Layout/Footer.vue'
 
 export default {
   name: 'app',
   components: {
-    AppNav, AppHome, AppFooter
+    AppNav, AppFooter
   }
 }
 </script>
 
-<style>
+<style scoped>
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-    background-color: #ededed;
+    /* -webkit-font-smoothing: antialiased; */
+    /* -moz-osx-font-smoothing: grayscale; */
+    /* text-align: center; */
+    /* color: #2c3e50; */
+    /* padding: 0px 0px; */
+
+    background-color: red;
 }
 </style>

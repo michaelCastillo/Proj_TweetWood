@@ -12,7 +12,7 @@
       <br>
       <hr>
       <h3>Géneros existentes</h3>
-      <v-flex v-for="genre in genres">
+      <v-flex v-for="genre in genres" :key="genre.id">
         <v-card v-if="genre.disponible == true" width="300px" class="movie-card">
             <v-card-title primary-title>
                 <div>
