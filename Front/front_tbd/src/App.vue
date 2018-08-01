@@ -23,6 +23,10 @@ export default {
 </script>
 
 <style scoped>
+body {
+  background-color: #252525;
+}
+
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     /* -webkit-font-smoothing: antialiased; */
@@ -31,6 +35,6 @@ export default {
     /* color: #2c3e50; */
     /* padding: 0px 0px; */
 
-    background-color: red;
+    /* background-color: red; */
 }
 </style>

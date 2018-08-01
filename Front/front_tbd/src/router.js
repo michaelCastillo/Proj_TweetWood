@@ -8,6 +8,7 @@ import NewFilm from './components/Admin/NewFilm.vue'
 import Genre from './components/Admin/Genre.vue'
 import Films from './components/Admin/Films.vue'
 import NewGenre from './components/Admin/NewGenre.vue'
+import NeoGraph from './components/Movies/Grafo.vue'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
             path: '/films-admin',
             name: 'films-admin',
             component: Films
+        },
+        {
+            path: '/graph',
+            name: 'grafo',
+            component: NeoGraph
         }
     ]
 })

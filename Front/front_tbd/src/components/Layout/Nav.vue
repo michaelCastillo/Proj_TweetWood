@@ -13,6 +13,11 @@
                     <v-list-tile-content><v-list-tile-title>Films</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
                 <v-divider></v-divider>
+                <v-list-tile to="/graph">
+                    <v-list-tile-action><v-icon>share</v-icon></v-list-tile-action>
+                    <v-list-tile-content><v-list-tile-title>Graph</v-list-tile-title></v-list-tile-content>
+                </v-list-tile>
+                <v-divider></v-divider>
                 <v-subheader>Administrator</v-subheader>
                 <v-list-tile to="/admin">
                         <v-list-tile-action><v-icon>settings</v-icon></v-list-tile-action>
