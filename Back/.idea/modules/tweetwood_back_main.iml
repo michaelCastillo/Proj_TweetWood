@@ -12,7 +12,7 @@
     <facet type="web" name="Web Gradle : tweetwood_back-0.0.1-SNAPSHOT.war">
       <configuration>
         <webroots>
-          <root url="file://D:\Documents\USACH\Taller de BD\b_Back\Proj_TweetWood\Back\src\main\webapp" relative="/" />
+          <root url="file://C:\Users\JuanPablo\Desktop\Proj_TweetWood\Back\src\main\webapp" relative="/" />
         </webroots>
       </configuration>
     </facet>

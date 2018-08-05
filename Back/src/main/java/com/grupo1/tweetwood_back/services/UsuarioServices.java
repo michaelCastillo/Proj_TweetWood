@@ -35,5 +35,16 @@ public class UsuarioServices {
         return this.usuarioRepository.findUsuarioById(id);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/login/{usuario}/{password}", method = RequestMethod.GET)
+    @ResponseBody
+    public Long isUser(@PathVariable String usuario, @PathVariable String password){
+        Usuario user = usuarioRepository.findByCorreo(usuario, password);
+        if(user != null)
+            return user.getId();
+        else
+            return Long.valueOf(-1);
+    }
+
 
 }
