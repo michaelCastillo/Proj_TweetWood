@@ -135,7 +135,7 @@
                       let desaprobacion=100-this.film.estadisticas[tam].aprobacion;
                       desaprobacion = this.redondeo2decimales(desaprobacion);
                       this.datacollectionPie = {
-                        labels: ['Aprobación', 'Desaprobación'],
+                        labels: ['Aprobación (' + this.film.estadisticas[tam].aprobacion+'%)', 'Desaprobación (' + desaprobacion + '%)'],
                         datasets: [
                           {
                             label: 'Data One',
@@ -166,7 +166,9 @@
                           {
                             label: 'Aprobación histórica',
                             backgroundColor: '#f87979',
-                            data: dataList
+                            data: dataList,
+                            fill: "false",
+                            borderColor: '#f87979'
                           }
                         ]
                       }
@@ -176,7 +178,9 @@
                           {
                             label: 'Tweets',
                             backgroundColor: '#900C3F',
-                            data: dataList2
+                            data: dataList2,
+                            fill: "false",
+                            borderColor: '#900C3F'
                           }
                         ]
                       }

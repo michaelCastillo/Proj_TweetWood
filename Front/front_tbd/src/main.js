@@ -14,6 +14,17 @@ Vue.use(Vuetify);
 Vue.use(VueCharts);
 Vue.config.productionTip = false;
 
+router.beforeEach((to, from, next) => {
+    if(to.matched.some((record) => record.meta.requiresAuth)){
+        next({
+            path: '/login',
+            params: { nextUrl: to.fullPath }
+        })
+    } else{
+        next()
+    }
+})
+
 new Vue({
     render: h => h(App),
     router

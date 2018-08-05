@@ -16,7 +16,7 @@ let options =  {
          ticks: {
            fontSize: 16,
            fontColor: 'white'
-         }
+         },
       }],
       xAxes: [{
         gridLines: {
@@ -26,9 +26,10 @@ let options =  {
           fontSize: 16,
           fontColor: 'white'
         }
-     }]
-   }
+     }],
+    }
 }
+
 
 export default {
   extends: Line,

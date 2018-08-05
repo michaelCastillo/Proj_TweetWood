@@ -7,7 +7,10 @@ let options =  {
       fontColor: 'white',
       fontSize: 18
     }
-  }
+  },
+  cutoutPercentage: 0,
+  rotation: -0.5 * Math.PI,
+  circumference: 2 * Math.PI * 1,
 }
 
 export default {

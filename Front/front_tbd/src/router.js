@@ -14,6 +14,7 @@ import Login from './components/Login/Login.vue'
 Vue.use(Router)
 
 export default new Router({
+    mode: 'history',
     routes: [
         {
             path: '/',
@@ -29,11 +30,6 @@ export default new Router({
             path: '/films/:id',
             name: 'film',
             component: AppMovie
-        },
-        {
-            path: '/admin',
-            name: 'admin',
-            component: Admin
         },
         {
             path: '/new-film/:id',
@@ -61,9 +57,34 @@ export default new Router({
             component: NeoGraph
         },
         {
+            path: '/admin',
+            name: 'admin',
+            component: Admin,
+            meta: {requiresAuth: true}
+            // children: [
+            //     {
+            //         path: '/',
+            //         component: Admin,
+            //         meta: {requiresAuth: true}
+            //     }
+            // ]
+        },
+        {
             path: '/login',
             name: 'login',
             component: Login
         }
+        // ,
+        // {
+        //     path: '/admin',
+        //     name: 'admin',
+        //     component: Admin,
+        //     children: [
+        //         path: '/login'
+        //         meta: {
+        //             requiresAuth: true
+        //         }
+        //     ]
+        // },
     ]
 })
