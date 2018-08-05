@@ -9,6 +9,7 @@ import Genre from './components/Admin/Genre.vue'
 import Films from './components/Admin/Films.vue'
 import NewGenre from './components/Admin/NewGenre.vue'
 import NeoGraph from './components/Movies/Grafo.vue'
+import Login from './components/Login/Login.vue'
 
 Vue.use(Router)
 
@@ -58,6 +59,11 @@ export default new Router({
             path: '/graph',
             name: 'grafo',
             component: NeoGraph
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
         }
     ]
 })

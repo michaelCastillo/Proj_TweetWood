@@ -35,6 +35,6 @@ body {
     /* color: #2c3e50; */
     /* padding: 0px 0px; */
 
-    /* background-color: red; */
+    background-color: #303030;
 }
 </style>

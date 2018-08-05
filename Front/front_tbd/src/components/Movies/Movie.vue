@@ -6,15 +6,20 @@
                     <div class="movie-title">
                         <h1>{{film.nombre}}</h1>
                     </div>
-                    <div v-if="this.film.img != null">
-                        <img :src="poster+this.film.img"/>
+                    <div v-if="this.apiData.poster_path != null">
+                        <img :src="poster+this.apiData.poster_path"/>
                     </div>
                     <div v-else>
                         <h3>Imagen no se encuentra disponible.</h3>
                     </div>
                     <div class="movie-sinopsis">
                         <h3>Reseña</h3>
-                        <p>{{sinopsis}}</p>
+                        <div v-if="this.apiData.overview != null">
+                            <p>{{apiData.overview}}</p>
+                        </div>
+                        <div v-else>
+                            <p>Lamentablemente la reseña no se encuentra disponible.</p>
+                        </div>
                     </div>
                 </v-flex>
 
@@ -46,7 +51,7 @@
                         <v-tab-item v-for="n in 4" :key="n">
                             <div v-if="n==1">
                               <div align="center" v-for="tweet in tweetList" :key="tweet.id">
-                                <Tweet :id="tweet"></Tweet>
+                                  <Tweet :id="tweet" error-message="" error-message-class="tweet--not-found"></Tweet>
                               </div>
                               <br>
                               <hr>
@@ -101,12 +106,16 @@
             this.id = this.$route.params.id;
             this.getFilm();
         },
+        updated(){
+            this.getApiData(this.film.idApi);
+        },
         data: function () {
             return {
                 id: null,
                 film: null,
                 poster: 'https://image.tmdb.org/t/p/w342/',
-                sinopsis: 'After their reclusive grandmother passes away, the Graham family begins to unravel cryptic and increasingly terrifying secrets about their ancestry. The more they discover, the more they find themselves trying to outrun the sinister fate they seem to have inherited.',
+                api_key: "?api_key=946fc3c5365c912765fffe16866d65ed",
+                apiData: null,
                 datacollectionPie: null,
                 datacollectionLine: null,
                 datacollectionLine2: null,
@@ -171,7 +180,7 @@
                           }
                         ]
                       }
-                  });
+                    });
           },
           redondeo2decimales(numero){
             var flotante = parseFloat(numero);
@@ -180,6 +189,13 @@
           },
           splitTweet(){
             this.tweetList=this.film.fiveTweets.split("|");
+          },
+          getApiData(id){
+              axios.get('https://api.themoviedb.org/3/movie/' + id + this.api_key)
+                   .then((api_data) => {
+                       this.apiData = api_data.data;
+                    })
+                    .catch((err) => console.error(err));
           }
 
         }
