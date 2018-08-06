@@ -28,7 +28,7 @@
                 <v-btn
                     class="login-btn"
                     light
-                    @click="submit"
+                    @click="login"
                 >Ingresar</v-btn>
             </v-form>
             </v-flex>
@@ -38,6 +38,7 @@
 
 <script>
     import axios from 'axios';
+    // import router from 'vue-router';
 
     export default {
         name: 'login',
@@ -64,6 +65,13 @@
                         correo_admin: this.email,
                         password_admin: this.password
                     }).then((response) => {console.log(response)})
+                }
+            },
+            login(){
+                if(this.email === 'admin@usach.cl' && this.password === 'tbd12018')
+                {
+                    console.log("email: "+this.email+" pass: "+this.password);
+                    this.$router.push({path: '/admin'});
                 }
             }
 

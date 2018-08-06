@@ -2,7 +2,7 @@
     <v-app dark id="movie">
         <v-container fluid>
             <v-layout v-if="this.film != null" row wrap class="movie">
-                <v-flex xl4 lg4 md4 sm12 xs12 elevation-12 class="movie-picture">
+                <v-flex xl3 lg3 md3 sm12 xs12 elevation-12 class="movie-picture">
                     <div class="movie-title">
                         <h1>{{film.nombre}}</h1>
                     </div>

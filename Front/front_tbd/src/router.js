@@ -59,32 +59,13 @@ export default new Router({
         {
             path: '/admin',
             name: 'admin',
-            component: Admin,
-            meta: {requiresAuth: true}
-            // children: [
-            //     {
-            //         path: '/',
-            //         component: Admin,
-            //         meta: {requiresAuth: true}
-            //     }
-            // ]
+            component: Admin
+            // meta: {requiresAuth: true}
         },
         {
             path: '/login',
             name: 'login',
             component: Login
         }
-        // ,
-        // {
-        //     path: '/admin',
-        //     name: 'admin',
-        //     component: Admin,
-        //     children: [
-        //         path: '/login'
-        //         meta: {
-        //             requiresAuth: true
-        //         }
-        //     ]
-        // },
     ]
 })

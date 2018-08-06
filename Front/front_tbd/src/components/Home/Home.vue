@@ -3,7 +3,7 @@
         <v-container class="app-home-container">
             <v-container fluid>
               <v-layout row wrap>
-                <v-flex xl6  lg6  md6 sm12 xs12 elevation-6>
+                <v-flex xl6  lg5  md6 sm12 xs12 elevation-6>
                   <div class="bar-chart">
                     <BarChart 
                       :chart-data="datacollectionBar2"

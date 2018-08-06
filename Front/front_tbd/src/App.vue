@@ -23,9 +23,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  background-color: #252525;
-}
 
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

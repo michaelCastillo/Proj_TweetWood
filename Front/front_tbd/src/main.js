@@ -16,10 +16,13 @@ Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
     if(to.matched.some((record) => record.meta.requiresAuth)){
-        next({
-            path: '/login',
-            params: { nextUrl: to.fullPath }
-        })
+        
+        if(record > 0){
+            next({
+                path: '/login',
+                params: { nextUrl: to.fullPath }
+            })
+        }
     } else{
         next()
     }

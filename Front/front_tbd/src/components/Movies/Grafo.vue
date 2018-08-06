@@ -2,7 +2,7 @@
    <v-container fluid grid-list-xs>
         <v-layout row wrap justify-center>
             <v-flex xs12 sm12 md2 lg2 xl2 elevation-5 class="flex">
-                <h2 class="graph-title">Influencia de los usuarios agrupados por géneros de películas.</h2>
+                <h2 class="graph-title">Influencia de los usuarios en los distintos géneros de películas.</h2>
                 
                 <v-flex xs12 class="codigo">
                         <div class="usuarios"><h1>Usuarios</h1></div>
@@ -22,94 +22,21 @@
  
  <script>
     import * as d3 from 'd3';
+    import axios from 'axios';
 
     export default {
         name: 'grafo',
         data(){
             return {
-                data: {
+                data: null,
+                graph: {
                     "nodes": [{
-                        "name": "Juan",
-                        "group": 1
-                    }, {
-                        "name": "Juanito",
-                        "group": 1
-                    }, {
-                        "name": "Roberto",
-                        "group": 1
-                    }, {
-                        "name": "Carlos",
-                        "group": 1
-                    }, {
-                        "name": "Julio",
-                        "group": 1
-                    }, {
-                        "name": "Jotita",
-                        "group": 2
-                    }, {
-                        "name": "Oscar",
-                        "group": 2
-                    }, {
-                        "name": "Pablillo",
-                        "group": 2
-                    }, {
-                        "name": "lalo",
-                        "group": 3
-                    }, {
-                        "name": "javo",
-                        "group": 3
-                    }, {
-                        "name": "nico",
-                        "group": 3
+                        name: "",
+                        group: 0
                     }],
                     "links": [{
-                        "source": 0,
-                        "target": 1
-                    },{
-                        "source": 0,
-                        "target": 2
-                    },{
-                        "source": 0,
-                        "target": 3
-                    },{
-                        "source": 0,
-                        "target": 4
-                    },{
-                        "source": 1,
-                        "target": 2
-                    },{
-                        "source": 1,
-                        "target": 3
-                    },{
-                        "source": 1,
-                        "target": 4
-                    },{
-                        "source": 2,
-                        "target": 3
-                    },{
-                        "source": 2,
-                        "target": 4
-                    },{
-                        "source": 0,
-                        "target": 5
-                    },{
-                        "source": 5,
-                        "target": 6
-                    },{
-                        "source": 5,
-                        "target": 7
-                    },{
-                        "source": 0,
-                        "target": 8
-                    },{
-                        "source": 0,
-                        "target": 9
-                    },{
-                        "source": 0,
-                        "target": 10
-                    },{
-                        "source": 8,
-                        "target": 7
+                        source: 0,
+                        target: 0
                     }]
                 }
             }
@@ -125,29 +52,34 @@
                             .attr("height", height)
                 
                 var force = d3.forceSimulation()
-                              .force("charge", d3.forceManyBody().strength(-1600).distanceMin(150).distanceMax(1000)) 
+                              .force("charge", d3.forceManyBody().strength(-700).distanceMin(150).distanceMax(1000)) 
                               .force("link", d3.forceLink().id(function(d) { return d.index })) 
                               .force("center", d3.forceCenter(width / 2, height / 2))
                               .force("y", d3.forceY(0.001))
                               .force("x", d3.forceX(0.001))
                 
                 var color = function (group) {
-                    if (group == 1) {
-                        return "#aaa"
-                    } else if (group == 2) {
-                        return "#fbc280"
+                    if (group == 0) {
+                        return "#970c0c"
+                    } else if (group == 1) {
+                        return "#17cde6"
                     } else {
-                        return "#405275"
+                        return "#ce7909"
                     }
                 }
 
                 var size = function (group) {
-                    if(group == 1) {
-                        return 20
-                    } else if (group == 2) {
-                        return 30
+                    if(group == 0) {
+                        return 15
+                    } else if (group == 1) {
+                        return 25
                     } else {
-                        return 40
+                        return 30
+                        
+                        // for(let i = 0; i < this.data.generos.lenght;i++){
+                        //     let influencia = this.data.generos[i].valorizacionneofourj
+
+                        // }
                     }
                 }
 
@@ -196,8 +128,8 @@
                 node.append("text")
                     .attr("dx", -18)
                     .attr("dy", 8)
-                    .style("font-family", "overwatch")
-                    .style("font-size", "18px")
+                    .style("font-family", "roboto")
+                    .style("font-size", "14px")
 
                     .text(function (d) {
                         return d.name
@@ -217,11 +149,75 @@
                     node.attr("transform", function (d) {
                         return "translate(" + d.x + "," + d.y + ")";
                     });
-                });
-            }   
+                })
+            },
+            getData(){
+                axios.get('http://206.189.224.139:8080/neofourjay-0.0.1-SNAPSHOT/init/getStatics')
+                     .then((response) => {
+                         this.data = response.data;
+                         let count = 0;
+                         let group_id = 2;
+                         let rom = "Romance";
+
+                         for(let i = 0; i < this.data.generos.length; i++)
+                         {
+
+                            if(this.data.generos[i].nombre !== "Inception_"){
+                                this.graph.nodes.push({
+                                    name: this.data.generos[i].nombre,
+                                    group: group_id
+                                });
+    
+                                this.graph.links.push({
+                                    source: i+1,
+                                    target: 0
+                                });
+                            }
+                            else {
+                                this.graph.nodes.push({
+                                    name: rom,
+                                    group: group_id
+                                });
+    
+                                this.graph.links.push({
+                                    source: i+1,
+                                    target: 0
+                                });
+                            }
+
+                            group_id++
+                            count++
+                         }
+                        
+                        for(let i = 0; i < this.data.generos.length; i++){
+                            for(let j = 0; j < this.data.generos[i].users.length; j++){
+                                this.graph.nodes.push({
+                                    name: this.data.generos[i].users[j].user,
+                                    group: 1
+                                })
+
+                                this.graph.links.push({
+                                    source: count+1,
+                                    target: i+1
+                                })
+
+                                count++
+                            }
+                        }   
+                        
+                     })
+                     .catch((err) => console.error(err))
+                     .then(() => {
+                         this.loadGraph(this.graph);
+                     }).catch((err) => console.log(err));
+            }
         },
+        beforeMounted(){
+            },
         mounted(){
-            this.loadGraph(this.data);
+            this.getData();
+            // this.loadGraph(this.graph);
+            // console.log(this.graph);
         }
     }
  </script>
@@ -235,7 +231,7 @@
     }
 
     .link {
-        stroke: rgb(146, 40, 40);
+        stroke: #b10505;
         stroke-width: 0.5%;
     }
 
@@ -251,24 +247,26 @@
     } */
 
     #grafito{
-        background-color: #303030;
-        margin: 5% 0%;
+        background-color: #d1d1d1;
+        /* background-color: #303030; */
+        margin: 0% 0%;
     }
 
     .usuarios {
         margin: 0 auto;
         height: 50px;
         width: 90%;
-        background-color: rgb(23, 205, 230);
+        background-color: #17cde6;
         text-align: center;
         justify-content: initial;
+        color: white;
     }
 
     .generos {
         margin: 10px auto;
         height: 50px;
         width: 90%;
-        background-color: rgb(206, 121, 9);
+        background-color: #ce7909;
         text-align: center;
         justify-content: initial;
         color: white;
@@ -278,7 +276,7 @@
         margin: 0 auto;
         height: 50px;
         width: 90%;
-        background-color: rgb(151, 12, 12);
+        background-color: #970c0c;
         text-align: center;
         justify-content: initial;
         color: white;
