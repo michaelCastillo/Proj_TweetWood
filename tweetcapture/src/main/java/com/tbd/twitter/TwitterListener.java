@@ -89,11 +89,12 @@ public class TwitterListener {
 			for(int i = 0; i < s; i++)
 				System.out.println(wordsToFilter[i]);
 			double[][] stgoCoordinates = {{-70.656962,-33.936031},{-70.510731,-33.093747}};
-			FilterQuery filter=new FilterQuery();
+			FilterQuery filter=new FilterQuery(0,null,wordsToFilter,stgoCoordinates,new String[]{"es"});
 			//filter.track(new String[]{"estrenos","peliculas"});
-			//filter.locations(stgoCoordinates);
-			filter.track(wordsToFilter);
-			filter.language(new String[]{"es"});
+			//filter.track(wordsToFilter).locations(stgoCoordinates);
+
+			//filter.track(wordsToFilter);
+			//filter.language(new String[]{"es"});
 			twitterStream.filter(filter);
 		}
 		catch(Exception e){
@@ -108,7 +109,7 @@ public class TwitterListener {
 		String out;
 		StringBuffer sb = new StringBuffer();
 		try{
-			URL url = new URL("http://localhost:1310/keywords/");
+			URL url = new URL("http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/keywords/");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("GET");
@@ -122,6 +123,7 @@ public class TwitterListener {
 			JSONArray jsonResult = new JSONArray(out);
 			for(int i = 0; i < jsonResult.length(); i++){
 				JSONObject object = jsonResult.getJSONObject(i);
+                System.out.println("palabra=> "+object.getString("palabra") );
 				keywords.add(object.getString("palabra"));
 			}
 			conn.disconnect();

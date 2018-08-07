@@ -7,10 +7,11 @@ import com.grupo1.tweetwood_back.repositories.GeneroRepository;
 import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/lucene")
@@ -24,11 +25,29 @@ public class LuceneService {
     private KeyWordRepository keyWordRepository;
     @Autowired
     private GeneroRepository generoRepository;
+
+    @CrossOrigin
     @RequestMapping(value = "/start",method = RequestMethod.POST)
     @ResponseBody
     public void startLucene(){
         lucene l = new lucene(this.keyWordRepository);
+        System.out.println("ejecute");
         l.exec_lucene(this.peliculaRepository,estadisticaRepository,this.generoRepository);
+        System.out.println("termine");
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/startneofourjay",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> startLuceneNeoFourJay(){
+        lucene l = new lucene(this.keyWordRepository);
+        System.out.println("ejecute");
+        List<List<Map<String,String>>> users = l.getUsers(this.peliculaRepository,estadisticaRepository,this.generoRepository);
+        Map<String,Object> response = new HashMap<>();
+        response.put("usersData",users);
+        response.put("generos",this.generoRepository.findAll());
+        System.out.println("termine");
+        return response;
     }
 
 

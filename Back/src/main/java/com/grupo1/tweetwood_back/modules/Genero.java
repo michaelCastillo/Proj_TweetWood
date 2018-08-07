@@ -23,13 +23,30 @@ public class Genero {
     private String nombre;
     private Double valorizacion;
     private boolean disponible;
-
+    private Double valNeo4j;
+    private String fiveMostFollowedTwitters;
     @ManyToMany
     @JsonIgnore
     @Nullable
     @JoinTable(name="peliculas_generos",joinColumns = @JoinColumn(name = "id_genero"), inverseJoinColumns = @JoinColumn(name = "id_pelicula"))
     private List<Pelicula> peliculas;
 
+
+    public Double getValNeo4j() {
+        return valNeo4j;
+    }
+
+    public void setValNeo4j(Double valNeo4j) {
+        this.valNeo4j = valNeo4j;
+    }
+
+    public String getFiveMostFollowedTwitters() {
+        return fiveMostFollowedTwitters;
+    }
+
+    public void setFiveMostFollowedTwitters(String fiveMostFollowedTwitters) {
+        this.fiveMostFollowedTwitters = fiveMostFollowedTwitters;
+    }
 
     public Genero(){
         this.disponible = true;

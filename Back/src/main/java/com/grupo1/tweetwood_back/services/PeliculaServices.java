@@ -323,7 +323,12 @@ public class PeliculaServices {
         List<Pelicula> peliculas = this.peliculaRepository.findAll();
         List<Pelicula> peliculasResponse = new ArrayList<>();
         //Se ordena
-        Collections.sort(peliculas,new SortByValuePelicula());
+        if(peliculas == null){
+            System.out.println("peliculas nulas");
+        }else{
+            Collections.sort(peliculas,new SortByValuePelicula());
+        }
+
         for(int x = 0; (x<peliculas.size() && x<10); x++){
             peliculasResponse.add(peliculas.get(x));
         }
@@ -349,6 +354,7 @@ class SortByValuePelicula implements Comparator<Pelicula>{
 
     @Override
     public int compare(Pelicula o1, Pelicula o2) {
+        
         return (o2.getValue().intValue() - o1.getValue().intValue());
     }
 }

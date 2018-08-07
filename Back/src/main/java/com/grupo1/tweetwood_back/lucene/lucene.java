@@ -66,9 +66,14 @@ public class lucene {
 
             while(db_cursor.hasNext()){
                 DBObject obj = db_cursor.next();
+
                 Document doc = new Document();
                 doc.add(new StringField("id",obj.get("_id").toString(),Field.Store.YES));
                 doc.add(new TextField("text",obj.get("text").toString(), Field.Store.YES));
+                doc.add(new TextField("retweetCount",obj.get("retweetCount").toString(), Field.Store.YES));
+                doc.add(new StringField("id_user",((DBObject)obj.get("user")).get("_id").toString(),Field.Store.YES));
+                doc.add(new StringField("name_user",((DBObject)obj.get("user")).get("name").toString(),Field.Store.YES));
+                doc.add(new StringField("num_followers",((DBObject)obj.get("user")).get("followersCount").toString(),Field.Store.YES));
                 if(writer.getConfig().getOpenMode() == OpenMode.CREATE){
                     writer.addDocument(doc);
                 }
@@ -85,7 +90,7 @@ public class lucene {
         return true;
     }
 
-    public ArrayList<Map<String,String>> searchIndex(String film){
+    public ArrayList<Map<String,String>> searchIndex(String film, int op){
          ArrayList<Map<String,String>> docs = new ArrayList<>();
         try{
             IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get("index/")));
@@ -102,6 +107,12 @@ public class lucene {
                 Map<String,String> doc_elements = new HashMap<>();
                 doc_elements.put("id",doc.get("id"));
                 doc_elements.put("text",doc.get("text"));
+                if(op == 1){
+                    doc_elements.put("retweetedCount",doc.get("retweetCount"));
+                    doc_elements.put("id_user",doc.get("id_user"));
+                    doc_elements.put("name_user",doc.get("name_user"));
+                    doc_elements.put("num_followers",doc.get("num_followers"));
+                }
                 docs.add(doc_elements);
             }
             reader.close();
@@ -151,12 +162,92 @@ public class lucene {
 
     }
 
-    //@Autowired
-    public void exec_lucene(PeliculaRepository peliculaRepository, EstadisticaRepository estadisticaRepository, GeneroRepository generoRepository) {
-        sat = new SentimentAnalysisTweets(peliculaRepository,estadisticaRepository);
+    public List<List<Map<String,String>>> getUsers(PeliculaRepository peliculaRepository, EstadisticaRepository estadisticaRepository, GeneroRepository generoRepository){
         MongoClient myMongo;
         myMongo = new MongoClient("206.189.224.139:27017");
-        DB db = myMongo.getDB("twitter");
+        DB db = myMongo.getDB("twitternew");
+        DBCollection dbCollection = db.getCollection("statusJSONImpl");
+        DBCursor db_cursor = dbCollection.find();
+        ArrayList<Map<String,String>> tweets;
+        List<KeyWord> keyWords = this.keyWordRepository.findAll();
+        ArrayList<String> keywords = new ArrayList<>();
+        for(KeyWord keyWord: keyWords){
+            keywords.add(keyWord.getPalabra());
+        }
+        System.out.println("Antes del index");
+        boolean isIndexReady = createIndex(db_cursor); //Se crea el indice invertido.
+        System.out.println("Pase el index");
+        List<List<Map<String,String>>> usersToOut = new ArrayList<>();
+        if(isIndexReady){
+            List<Pelicula> peliculas;
+            List<Genero> generos = generoRepository.findAll();
+            if(generos != null){
+                for(Genero gen : generos){
+                    ArrayList<Map<String,String>> users = new ArrayList<>();
+                    Double valoration = new Double(0);
+                    Long numTweets =new Long(0);
+                    System.out.println("Genero=> "+gen.getNombre());
+                    peliculas = gen.getPeliculas();
+                    Map<String,String> user ;
+                    for(Pelicula peli: peliculas){
+                        System.out.println("Pelicula: "+peli.getNombre());
+                        for(KeyWord keyWord: peli.getKeywords()){
+                            System.out.println("Keyword => "+keyWord.getPalabra());
+                            String key = keyWord.getPalabra();
+                            tweets = searchIndex(key,1);
+                            //System.out.println("pelicula: " + key);
+                            for (Map<String,String> t : tweets) {
+                                numTweets++;
+                                valoration += (Long.parseLong(t.get("num_followers")) *0.5);
+                                valoration += (Long.parseLong(t.get("retweetedCount")) *0.5) ;
+                                user = new HashMap<>();
+                                //System.out.println("id_user => "+t.get("id_user"));
+                                user.put("id_user",t.get("id_user"));
+                                user.put("name_user",t.get("name_user"));
+                                user.put("num_followers",t.get("num_followers"));
+                                users.add(user); //almaceno los usuarios
+                            }
+                        }
+                    }
+                    if(numTweets != 0){
+                        valoration = valoration/numTweets; //Esta se tiene que guardar en el genero.
+                    }
+
+                    Collections.sort(users,new SortByFollowers());
+                    String fiveMostFollowed = mapIdUsers(users); //Tambien se guarda en el genero
+                    gen.setFiveMostFollowedTwitters(fiveMostFollowed);
+                    gen.setValNeo4j(valoration);
+                    generoRepository.save(gen);
+                    usersToOut.add(users.subList(0,5));
+                }
+            }
+        }
+        return usersToOut;
+    }
+
+
+    private String mapIdUsers(ArrayList<Map<String,String>> users){
+         String mappedUsers = "";
+         int max = users.size()<5 ? users.size() : 5;
+
+         for(int x= 0; x < max ; x++){
+             Map<String,String> user = users.get(x);
+             mappedUsers+= (user.get("id_user")+"|");
+             if(x == (max-1)){
+                 mappedUsers+=(user.get("id_user"));
+             }
+         }
+        //System.out.println("mapped users => "+ mappedUsers);
+         return mappedUsers;
+    }
+
+    //@Autowired
+    public void exec_lucene(PeliculaRepository peliculaRepository, EstadisticaRepository estadisticaRepository,
+                            GeneroRepository generoRepository) {
+        sat = new SentimentAnalysisTweets(peliculaRepository,estadisticaRepository);
+        MongoClient myMongo;
+        myMongo = new MongoClient("localhost:27017");
+        DB db = myMongo.getDB("twitternew");
         DBCollection dbCollection = db.getCollection("statusJSONImpl");
         DBCursor db_cursor = dbCollection.find();
         ArrayList<Map<String,String>> tweets;
@@ -168,7 +259,9 @@ public class lucene {
         double pos = 0.0;
         double neg = 0.0;
         double stat = 0.0;
+        System.out.println("antes del index");
         boolean isIndexReady = createIndex(db_cursor);
+        System.out.println("despues del index");
         if (isIndexReady) {
             //Hay que cambiar esto y dejarlo por cada pelicula, que entonces
             //lo haga por cada una de las keywords...! ya que asi se pueden sumar
@@ -182,7 +275,7 @@ public class lucene {
                     ArrayList<Tweet> tweets_obj = new ArrayList<>();
                     for (KeyWord keyword : pelicula.getKeywords()) {
                         String key = keyword.getPalabra();
-                        tweets = searchIndex(key);
+                        tweets = searchIndex(key,0);
                         //System.out.println("pelicula: " + key);
                         for (Map<String,String> t : tweets) {
                             Tweet tw = new Tweet();
@@ -191,6 +284,7 @@ public class lucene {
 
                                 Double value = sat.getAnalysis(t.get("text"));
                                 t.put("value",Double.toString(value));
+                                //System.out.println("tw_user=> "+t.get("id"));
                                 tw.setId(t.get("id"));
                                 tw.setText(t.get("text"));
                                 tw.setValue(value);
@@ -259,6 +353,13 @@ public class lucene {
 
 }
 
+class SortByFollowers implements Comparator<Map<String,String>>{
+
+    @Override
+    public int compare(Map<String, String> o1, Map<String, String> o2) {
+        return -((int)(Long.parseLong(o1.get("num_followers")) - Long.parseLong(o2.get("num_followers"))));
+    }
+}
 
 class SortByValue implements Comparator<Tweet>{
 

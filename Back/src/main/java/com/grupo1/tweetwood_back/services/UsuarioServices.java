@@ -24,6 +24,8 @@ public class UsuarioServices {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public Usuario createUsuario(@RequestBody Usuario usuario){
+
+        System.out.println("asd");
         return this.usuarioRepository.save(usuario);
     }
 

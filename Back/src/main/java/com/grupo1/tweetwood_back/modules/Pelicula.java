@@ -31,6 +31,8 @@ public class Pelicula {
     private Usuario usuario;
 
     public Pelicula(){
+        this.value = new Double(0);
+        this.numTweets = new Long(0);
         this.disponible = true;
     }
 
