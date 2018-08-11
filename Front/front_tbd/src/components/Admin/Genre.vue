@@ -63,7 +63,7 @@
       getGenres() {
         axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos')
         .then((genres)=>{
-          this.genres = genres.data;
+          this.genres = genres.data.sort();
           });
       },
       able(id){

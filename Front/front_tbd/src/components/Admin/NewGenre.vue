@@ -29,9 +29,10 @@
           let global_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos`;
           if(this.id==-1){
             let objPost = {
-              nombre: this.title
+              nombre: this.title,
+              valorizacion:0
             };
-            axios.post(global_url,objPost)
+            axios.post(global_url+'/create',objPost)
             .then(response =>{
               console.log(response);
               this.$router.push('/genre');
@@ -45,7 +46,7 @@
               id: this.id,
               nombre: this.title
             };
-            axios.put(global_url,objPost)
+            axios.put(global_url+'/'+this.id,objPost)
             .then(response =>{
               console.log(response);
               this.$router.push('/genre');
