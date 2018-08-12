@@ -165,10 +165,10 @@
                         datasets: [
                           {
                             label: 'Aprobación histórica',
-                            backgroundColor: '#f87979',
+                            backgroundColor: '#2ae03c',
                             data: dataList,
                             fill: "false",
-                            borderColor: '#f87979'
+                            borderColor: '#2ae03c'
                           }
                         ]
                       }
@@ -177,10 +177,10 @@
                         datasets: [
                           {
                             label: 'Tweets',
-                            backgroundColor: '#900C3F',
+                            backgroundColor: '#2ac2e0',
                             data: dataList2,
                             fill: "false",
-                            borderColor: '#900C3F'
+                            borderColor: '#2ac2e0'
                           }
                         ]
                       }

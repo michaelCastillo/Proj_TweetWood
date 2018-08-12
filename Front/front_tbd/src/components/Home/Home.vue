@@ -1,34 +1,30 @@
 <template>
     <v-app id="app-home">
-        <v-container class="app-home-container">
+        <!-- <v-container class="app-home-container"> -->
             <v-container fluid>
-              <v-layout row wrap>
-                <v-flex xl6  lg5  md6 sm12 xs12 elevation-6>
-                  <div class="bar-chart">
+              <v-layout row>
+                <v-flex xl6  lg6  md6 sm12 xs12 elevation-6>
+                  <!-- <div class="bar-chart"> -->
                     <BarChart 
+                      class="bar-chart"
                       :chart-data="datacollectionBar2"
-                      :options="{responsive: true, maintainAspectRatio: true}"
-                      :width="700"
-                      :height="800"
                     >
                     </BarChart>
-                  </div>
                 </v-flex>
                 <!-- <v-flex xl5 offset-xl1 lg5 offset-lg1 md5 offset-md1 sm12 xs12 elevation-6> -->
-                <v-flex xl5 offset-xl1 lg5 offset-lg1 md5 offset-md1 sm12 xs12 elevation-6>
-                  <div class="bar-chart">
+                <v-flex xl6 lg6 md6 sm12 xs12 elevation-6>
+                  <!-- <div class="bar-chart"> -->
                     <BarChart 
+                      class="bar-chart"
                       :chart-data="datacollectionBar"
-                      :options="{responsive: true, maintainAspectRatio: true}"
-                      :width="700"
-                      :height="965"
+                      
                     >
                     </BarChart>
-                  </div>
+                  <!-- </div> -->
                 </v-flex>
               </v-layout>
             </v-container>
-        </v-container>
+        <!-- </v-container> -->
     </v-app>
 </template>
 
@@ -98,7 +94,7 @@
                     {
                       label: 'Películas más tweeteadas',
                       backgroundColor: '#79b0f8',
-                      data: dataList2
+                      data: dataList2,
                     }
                   ]
                   }
@@ -114,11 +110,17 @@
 </script>
 <style scoped>
   .bar-chart {
-    /* background-color: white; */
+    background-color: white;
   }
 
   .app-home-container {
+    /* background-color: #303030; */
+    /* width: 100%; */
+    /* margin: 0% 10%; */
+  }
+
+  #app-home {
     background-color: #303030;
-    width: 100%;
+    /* margin: 0 0; */
   }
 </style>

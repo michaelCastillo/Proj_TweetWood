@@ -1,20 +1,41 @@
  <template>
    <v-container fluid grid-list-xs>
+        <h2 class="graph-title">Influencia de los usuarios en los distintos géneros de películas.</h2>
         <v-layout row wrap justify-center>
             <v-flex xs12 sm12 md2 lg2 xl2 elevation-5 class="flex">
-                <h2 class="graph-title">Influencia de los usuarios en los distintos géneros de películas.</h2>
-                
                 <v-flex xs12 class="codigo">
                         <div class="usuarios"><h1>Usuarios</h1></div>
                         <div class="generos"><h1>Géneros</h1></div>
                         <div class="pelicula"><h1>Película</h1></div>
                 </v-flex>
             </v-flex>
-            <v-flex xs12 sm12 md9 lg9 xl9 elevation-5>
+            <v-flex xs12 sm12 md10 lg10 xl10 elevation-5>
                 <div id="grafo">
                     <div id="grafito"></div>
                 </div>
-            </v-flex>        
+            </v-flex>
+            <v-flex xs12>
+                <v-data-table dark
+                    :headers="headers"
+                    :items="gen_table"
+                    class="elevation-1"
+                >
+                    <template slot="headerCell" slot-scope="props">
+                    <v-tooltip bottom>
+                        <span slot="activator">
+                        {{ props.header.text }}
+                        </span>
+                        <span>
+                        {{ props.header.text }}
+                        </span>
+                    </v-tooltip>
+                    </template>
+                    <template slot="items" slot-scope="props">
+                    <td>{{ props.item.name }}</td>
+                    <td class="text-xs-center">{{ props.item.influencia }}</td>
+                    </template>
+                </v-data-table>
+            </v-flex> 
         </v-layout>
 
    </v-container>
@@ -29,6 +50,8 @@
         data(){
             return {
                 data: null,
+                group_id: 2,
+                group_id_size: [],
                 graph: {
                     "nodes": [{
                         name: "",
@@ -38,13 +61,221 @@
                         source: 0,
                         target: 0
                     }]
+                },
+                headers: [
+                    {
+                        text: 'Géneros',
+                        align: 'left',
+                        sortable: false,
+                        value: 'name'
+                    },
+                    { text: 'Influencia (Puntos)', value: 'influencia', align: 'center'}
+                ],
+                gen_table: [],
+                desserts: [
+                {
+                    value: false,
+                    name: 'Romance',
+                    influencia: 67,
+                },
+                {
+                    value: false,
+                    name: 'Terror',
+                    influencia: 72,
+                },
+                {
+                    value: false,
+                    name: 'Acción',
+                    influencia: 62,
+                },
+                {
+                    value: false,
+                    name: 'Infantil',
+                    influencia: 58,
+                },
+                ],
+                graph_demo: {
+                    "nodes": [{
+                        name: "",
+                        group: 0
+                    },
+                    {
+                        name: "Acción",
+                        group: 1
+                    },
+                    {
+                        name: "Romance",
+                        group: 1
+                    },
+                    {
+                        name: "Terror",
+                        group: 1
+                    },
+                    {
+                        name: "Infantil",
+                        group: 1
+                    },
+                    {
+                        name: "LaTercera",
+                        group: 2
+                    },
+                    {
+                        name: "RNTV",
+                        group: 2
+                    },
+                    {
+                        name: "CarmenG",
+                        group: 2
+                    },
+                    {
+                        name: "DylanAckles",
+                        group: 2
+                    },
+                    {
+                        name: "Espinof",
+                        group: 2
+                    },
+                    {
+                        name: "Milenio.com",
+                        group: 2
+                    },
+                    {
+                        name: "RNTV",
+                        group: 2
+                    },
+                    {
+                        name: "CineMundo",
+                        group: 2
+                    },
+                    {
+                        name: "markozaror",
+                        group: 2
+                    },
+                    {
+                        name: "AVATTE",
+                        group: 2
+                    },
+                    {
+                        name: "TrendsSantiago",
+                        group: 2
+                    },
+                    {
+                        name: "CineMundo",
+                        group: 2
+                    },
+                    {
+                        name: "elclubpelicula",
+                        group: 2
+                    },
+                    {
+                        name: "SANFICFESTIVAL",
+                        group: 2
+                    },
+                    {
+                        name: "cinemachile",
+                        group: 2
+                    },
+                    {
+                        name: "CinemarkChile",
+                        group: 2
+                    }
+                    ],
+                    "links": [{
+                        source: 0,
+                        target: 0
+                    },
+                    {
+                        source: 1,
+                        target: 0
+                    },
+                    {
+                        source: 2,
+                        target: 0
+                    },
+                    {
+                        source: 3,
+                        target: 0
+                    },
+                    {
+                        source: 4,
+                        target: 0
+                    },
+                    {
+                        source: 5,
+                        target: 1
+                    },
+                    {
+                        source: 6,
+                        target: 1
+                    },
+                    {
+                        source: 7,
+                        target: 1
+                    },
+                    {
+                        source: 8,
+                        target: 1
+                    },
+                    {
+                        source: 9,
+                        target: 2
+                    },
+                    {
+                        source: 9,
+                        target: 2
+                    },
+                    {
+                        source: 10,
+                        target: 2
+                    },
+                    {
+                        source: 11,
+                        target: 2
+                    },
+                    {
+                        source: 12,
+                        target: 2
+                    },
+                    {
+                        source: 13,
+                        target: 3
+                    },
+                    {
+                        source: 14,
+                        target: 3
+                    },
+                    {
+                        source: 15,
+                        target: 3
+                    },
+                    {
+                        source: 16,
+                        target: 3
+                    },
+                    {
+                        source: 17,
+                        target: 4
+                    },
+                    {
+                        source: 18,
+                        target: 4
+                    },
+                    {
+                        source: 19,
+                        target: 4
+                    },
+                    {
+                        source: 20,
+                        target: 4
+                    }
+                    ]
                 }
             }
         },
         methods:{
-            loadGraph(input){
-                var width = 960
-                var height = 500
+            loadGraph(input, inputSize){
+                var width = 1180
+                var height = 1000
                 
                 var body = d3.select("#grafo");
                 var svg = body.select("#grafito").append("svg")
@@ -52,7 +283,7 @@
                             .attr("height", height)
                 
                 var force = d3.forceSimulation()
-                              .force("charge", d3.forceManyBody().strength(-700).distanceMin(150).distanceMax(1000)) 
+                              .force("charge", d3.forceManyBody().strength(-900).distanceMin(150).distanceMax(900)) 
                               .force("link", d3.forceLink().id(function(d) { return d.index })) 
                               .force("center", d3.forceCenter(width / 2, height / 2))
                               .force("y", d3.forceY(0.001))
@@ -68,19 +299,24 @@
                     }
                 }
 
-                var size = function (group) {
+                var size = function (group, size) {
+                    console.log("GROUP IS: "+group)
                     if(group == 0) {
-                        return 15
+                        return 10
                     } else if (group == 1) {
-                        return 25
+                        return 15
                     } else {
-                        return 30
+                        for(let i = 0; i < size.length; i ++){
+                            if(size[i].group === group)
+                                return size[i].val
+                        }
+                    }
                         
                         // for(let i = 0; i < this.data.generos.lenght;i++){
                         //     let influencia = this.data.generos[i].valorizacionneofourj
 
                         // }
-                    }
+                    
                 }
 
                 function dragstarted(d) {
@@ -119,7 +355,7 @@
 
                 node.append('circle')
                     .attr('r', function (d) {
-                        return size(d.group)
+                        return size(d.group, inputSize)
                     })
                     .attr('fill', function (d) {
                         return color(d.group);
@@ -156,38 +392,28 @@
                      .then((response) => {
                          this.data = response.data;
                          let count = 0;
-                         let group_id = 2;
-                         let rom = "Romance";
 
                          for(let i = 0; i < this.data.generos.length; i++)
                          {
+                            this.graph.nodes.push({
+                                name: this.data.generos[i].nombre,
+                                group: this.group_id
+                            });
 
-                            if(this.data.generos[i].nombre !== "Inception_"){
-                                this.graph.nodes.push({
-                                    name: this.data.generos[i].nombre,
-                                    group: group_id
-                                });
-    
-                                this.graph.links.push({
-                                    source: i+1,
-                                    target: 0
-                                });
-                            }
-                            else {
-                                this.graph.nodes.push({
-                                    name: rom,
-                                    group: group_id
-                                });
-    
-                                this.graph.links.push({
-                                    source: i+1,
-                                    target: 0
-                                });
-                            }
+                            this.graph.links.push({
+                                source: i+1,
+                                target: 0
+                            });
 
-                            group_id++
+                            this.group_id_size.push({
+                                group: this.group_id,
+                                val: (40 * (this.data.generos[i].valorizacionneofourj/25) + 15)
+                            });
+
+                            this.group_id++
                             count++
                          }
+                        
                         
                         for(let i = 0; i < this.data.generos.length; i++){
                             for(let j = 0; j < this.data.generos[i].users.length; j++){
@@ -204,12 +430,36 @@
                                 count++
                             }
                         }   
-                        
+
+                        // for(let k = 1; k < this.data.generos.length; k++){
+                        //     let val = this.data.generos[k].valorizacionneofourj;
+                        //     console.log("el genero: " + this.data.generos[k].nombre + " con una val: "+val);
+                        //     let total = 40 * (val / 25) + 10;
+                        //     this.group_id_size.push(total);
+                        // }
+
+
+
                      })
                      .catch((err) => console.error(err))
                      .then(() => {
-                         this.loadGraph(this.graph);
-                     }).catch((err) => console.log(err));
+                         console.log("GROUP_ID_SIZE: " + this.group_id_size);
+                         this.loadGraph(this.graph, this.group_id_size);
+                     })
+                     .catch((err) => console.log(err))
+                     .then(() => {
+                         this.loadDatatoTable();
+                     })
+                     .catch((err) => console.error(err));
+
+            },
+            loadDatatoTable(){
+                for(let i = 0; i < this.data.generos.length; i++){
+                    this.gen_table.push({
+                        name: this.data.generos[i].nombre,
+                        influencia: this.data.generos[i].valorizacionneofourj
+                    });
+                }
             }
         },
         beforeMounted(){
@@ -232,7 +482,7 @@
 
     .link {
         stroke: #b10505;
-        stroke-width: 0.5%;
+        stroke-width: 0.2%;
     }
 
     .node text {
@@ -283,11 +533,11 @@
     }
 
     .flex {
-        margin: 2% 2%;
+        margin: 1% 1%;
     }
 
     .codigo {
-        margin: 25% 2%;
+        /* margin: 25% 2%; */
     }
     
 </style>

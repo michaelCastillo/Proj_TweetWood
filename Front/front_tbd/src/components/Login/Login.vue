@@ -5,7 +5,7 @@
                 <h1>Administrador</h1>
             </v-flex>
             <v-flex xl12 lg12 md12 sm12 xs12>
-            <v-form  ref="form" v-model="valid" lazy-validation>
+            <!-- <v-form  ref="form" v-model="valid" lazy-validation> -->
                     <v-text-field
                         v-model="email"
                         :rules="[rules.email]"
@@ -30,7 +30,7 @@
                     light
                     @click="login"
                 >Ingresar</v-btn>
-            </v-form>
+            <!-- </v-form> -->
             </v-flex>
         </v-layout>
     </v-container>
@@ -58,14 +58,19 @@
         },
         methods: {
             submit(){
-                let url = "http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/login/correo_admin/password_admin";
+                let url = "http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/login/"+this.email+"/"+this.password;
 
-                if(this.$refs.form.validate()){
-                    axios.post(url, {
-                        correo_admin: this.email,
-                        password_admin: this.password
-                    }).then((response) => {console.log(response)})
-                }
+                // if(this.$refs.form.validate()){
+                //     axios.get(url, {
+                //         correo_admin: this.email,
+                //         password_admin: this.password
+                //     }).then((response) => {console.log(response)})
+                // }
+
+                // if(this.$refs.form.validate()){
+                    console.log(this.email + " | " + this.password)
+                    axios.get(url).then((response) => console.log(response)).catch((err) => console.error(err))
+                // }
             },
             login(){
                 if(this.email === 'admin@usach.cl' && this.password === 'tbd12018')

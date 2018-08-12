@@ -5,23 +5,23 @@
                 <v-subheader>TweetWood</v-subheader>
                 <v-list-tile to="/">
                     <v-list-tile-action><v-icon>home</v-icon></v-list-tile-action>
-                    <v-list-tile-content><v-list-tile-title >Home</v-list-tile-title></v-list-tile-content>
+                    <v-list-tile-content><v-list-tile-title >Página Principal</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-list-tile to="/films">
                     <v-list-tile-action><v-icon>local_movies</v-icon></v-list-tile-action>
-                    <v-list-tile-content><v-list-tile-title>Films</v-list-tile-title></v-list-tile-content>
+                    <v-list-tile-content><v-list-tile-title>Películas</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-list-tile to="/graph">
                     <v-list-tile-action><v-icon>share</v-icon></v-list-tile-action>
-                    <v-list-tile-content><v-list-tile-title>Graph</v-list-tile-title></v-list-tile-content>
+                    <v-list-tile-content><v-list-tile-title>Grafo</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-subheader>Administrator</v-subheader>
                 <v-list-tile to="/login">
                         <v-list-tile-action><v-icon>settings</v-icon></v-list-tile-action>
-                        <v-list-tile-content><v-list-tile-title>Administrator</v-list-tile-title></v-list-tile-content>
+                        <v-list-tile-content><v-list-tile-title>Administrador</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
             </v-list>
         </v-navigation-drawer>
