@@ -9,7 +9,7 @@ import com.grupo1.tweetwood_back.modules.Tweet;
 import com.grupo1.tweetwood_back.repositories.GeneroRepository;
 import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 import javassist.compiler.ast.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

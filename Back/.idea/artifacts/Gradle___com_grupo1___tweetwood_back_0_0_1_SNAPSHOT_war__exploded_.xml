@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="Gradle : com.grupo1 : tweetwood_back-0.0.1-SNAPSHOT.war (exploded)">
-    <output-path />
+    <output-path>$PROJECT_DIR$/build/libs/exploded/tweetwood_back-0.0.1-SNAPSHOT.war</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$">
         <manifest>TWFuaWZlc3QtVmVyc2lvbjogMS4wDQoNCg==</manifest>
@@ -85,7 +85,10 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-jcl:5.0.6.RELEASE" />
           <element id="library" level="project" name="Gradle: ch.qos.logback:logback-core:1.2.3" />
           <element id="library" level="project" name="Gradle: org.apache.logging.log4j:log4j-api:2.10.0" />
+<<<<<<< HEAD
           <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.5/f645ed69d595b24d4cf8b3fbb64cc505bede8829/gson-2.8.5.jar" />
+=======
+>>>>>>> 031cab4bbf178f52dea7295bc71c83416d7544e5
         </element>
       </element>
     </root>
