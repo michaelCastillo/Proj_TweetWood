@@ -25,12 +25,29 @@ public class Genero {
     private boolean disponible;
     private Double valNeo4j;
     private String fiveMostFollowedTwitters;
+
+    @Transient
+    private Long numLikes;
+    @Transient
+    private Long numRetweets;
+    @Transient
+    private Long numFollowers;
+    @Transient
+    private Long numTweets;
     @ManyToMany
     @JsonIgnore
     @Nullable
     @JoinTable(name="peliculas_generos",joinColumns = @JoinColumn(name = "id_genero"), inverseJoinColumns = @JoinColumn(name = "id_pelicula"))
     private List<Pelicula> peliculas;
 
+
+    public Long getNumTweets() {
+        return numTweets;
+    }
+
+    public void setNumTweets(Long numTweets) {
+        this.numTweets = numTweets;
+    }
 
     public Double getValNeo4j() {
         return valNeo4j;
@@ -46,6 +63,30 @@ public class Genero {
 
     public void setFiveMostFollowedTwitters(String fiveMostFollowedTwitters) {
         this.fiveMostFollowedTwitters = fiveMostFollowedTwitters;
+    }
+
+    public Long getNumFollowers() {
+        return numFollowers;
+    }
+
+    public void setNumFollowers(Long numFollowers) {
+        this.numFollowers = numFollowers;
+    }
+
+    public Long getNumLikes() {
+        return numLikes;
+    }
+
+    public void setNumLikes(Long numLikes) {
+        this.numLikes = numLikes;
+    }
+
+    public Long getNumRetweets() {
+        return numRetweets;
+    }
+
+    public void setNumRetweets(Long numRetweets) {
+        this.numRetweets = numRetweets;
     }
 
     public Genero(){

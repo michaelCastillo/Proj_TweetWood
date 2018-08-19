@@ -43,7 +43,7 @@ public class GeneroServices {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/create",method = RequestMethod.POST)
     @ResponseBody
     public Genero createGenero(@RequestBody Genero genero){
         return this.generoRepository.save(genero);
@@ -57,10 +57,12 @@ public class GeneroServices {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     @ResponseBody
-    public Genero updateGenero(@RequestBody Genero genero){
-        return this.generoRepository.save(genero);
+    public Genero updateGenero(@PathVariable Long id, @RequestBody Genero genero){
+        Genero gen = this.generoRepository.findGeneroById(id);
+        gen.setNombre(genero.getNombre());
+        return this.generoRepository.save(gen);
     }
 
     @CrossOrigin

@@ -1,5 +1,9 @@
 package com.grupo1.tweetwood_back.lucene;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.grupo1.tweetwood_back.SentimentAnalysis.SentimentAnalysisTweets;
 import com.grupo1.tweetwood_back.modules.*;
 import com.grupo1.tweetwood_back.repositories.EstadisticaRepository;
@@ -8,6 +12,7 @@ import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
 import com.mongodb.*;
 import javassist.compiler.ast.Keyword;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -70,7 +75,14 @@ public class lucene {
                 Document doc = new Document();
                 doc.add(new StringField("id",obj.get("_id").toString(),Field.Store.YES));
                 doc.add(new TextField("text",obj.get("text").toString(), Field.Store.YES));
-                doc.add(new TextField("retweetCount",obj.get("retweetCount").toString(), Field.Store.YES));
+                if(obj.get("retweetedStatus") != null){
+                    doc.add(new TextField("retweetCount",((DBObject)obj.get("retweetedStatus")).get("retweetCount").toString(), Field.Store.YES));
+                    doc.add(new TextField("numLikes",((DBObject)obj.get("retweetedStatus")).get("favoriteCount").toString(), Field.Store.YES));
+                }else{
+                    doc.add(new TextField("retweetCount","0", Field.Store.YES));
+                    doc.add(new TextField("numLikes","0", Field.Store.YES));
+                }
+
                 doc.add(new StringField("id_user",((DBObject)obj.get("user")).get("_id").toString(),Field.Store.YES));
                 doc.add(new StringField("name_user",((DBObject)obj.get("user")).get("name").toString(),Field.Store.YES));
                 doc.add(new StringField("num_followers",((DBObject)obj.get("user")).get("followersCount").toString(),Field.Store.YES));
@@ -109,7 +121,9 @@ public class lucene {
                 doc_elements.put("text",doc.get("text"));
                 if(op == 1){
                     doc_elements.put("retweetedCount",doc.get("retweetCount"));
+                    doc_elements.put("likesCount",doc.get("numLikes"));
                     doc_elements.put("id_user",doc.get("id_user"));
+
                     doc_elements.put("name_user",doc.get("name_user"));
                     doc_elements.put("num_followers",doc.get("num_followers"));
                 }
@@ -181,11 +195,19 @@ public class lucene {
         if(isIndexReady){
             List<Pelicula> peliculas;
             List<Genero> generos = generoRepository.findAll();
+            Long numLikesAllGen = new Long(0);
+            Long numRetweetsAllGen = new Long(0);
+            Long numFollowersAllGen = new Long(0);
+            Long numTweetsAllGen = new Long(0);
             if(generos != null){
                 for(Genero gen : generos){
+                    Long numFollowersTotal = new Long(0);
+                    Long numRetweetTotal = new Long(0);
+                    Long numLikesTotal = new Long(0);
+                    Long numTweets =new Long(0);
                     ArrayList<Map<String,String>> users = new ArrayList<>();
                     Double valoration = new Double(0);
-                    Long numTweets =new Long(0);
+
                     System.out.println("Genero=> "+gen.getNombre());
                     peliculas = gen.getPeliculas();
                     Map<String,String> user ;
@@ -198,8 +220,10 @@ public class lucene {
                             //System.out.println("pelicula: " + key);
                             for (Map<String,String> t : tweets) {
                                 numTweets++;
-                                valoration += (Long.parseLong(t.get("num_followers")) *0.5);
-                                valoration += (Long.parseLong(t.get("retweetedCount")) *0.5) ;
+                                numTweetsAllGen++;
+                                numFollowersTotal += Long.parseLong(t.get("num_followers"));
+                                numLikesTotal += Long.parseLong(t.get("likesCount"));
+                                numRetweetTotal += Long.parseLong(t.get("retweetedCount"));
                                 user = new HashMap<>();
                                 //System.out.println("id_user => "+t.get("id_user"));
                                 user.put("id_user",t.get("id_user"));
@@ -209,17 +233,31 @@ public class lucene {
                             }
                         }
                     }
-                    if(numTweets != 0){
-                        valoration = valoration/numTweets; //Esta se tiene que guardar en el genero.
-                    }
+                    gen.setNumTweets(numTweets);
+                    gen.setNumLikes(numLikesTotal);
+                    gen.setNumRetweets(numRetweetTotal);
+                    gen.setNumFollowers(numFollowersTotal);
+                    numFollowersAllGen+=numLikesTotal;
+                    numLikesAllGen += numLikesTotal;
+                    numRetweetsAllGen += numRetweetTotal;
 
                     Collections.sort(users,new SortByFollowers());
                     String fiveMostFollowed = mapIdUsers(users); //Tambien se guarda en el genero
                     gen.setFiveMostFollowedTwitters(fiveMostFollowed);
                     gen.setValNeo4j(valoration);
-                    generoRepository.save(gen);
-                    usersToOut.add(users.subList(0,5));
+                    if(users.size() >5){
+                        usersToOut.add(users.subList(0,5));
+                    }else{
+                        usersToOut.add(users);
+                    }
+
                 }
+            }
+            for(Genero gen: generos){
+                Double val = 0.4*(100*(double)gen.getNumFollowers()/numFollowersAllGen) + 0.1*((100*(double)gen.getNumLikes())/(numLikesAllGen))
+                        + 0.3*((100*(double)gen.getNumRetweets())/(numRetweetsAllGen)) + 0.2*((100*(double)gen.getNumTweets())/(numTweetsAllGen));
+                gen.setValNeo4j(val);
+                generoRepository.save(gen);
             }
         }
         return usersToOut;
