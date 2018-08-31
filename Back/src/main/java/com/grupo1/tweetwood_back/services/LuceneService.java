@@ -9,6 +9,7 @@ import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,11 +30,12 @@ public class LuceneService {
     @CrossOrigin
     @RequestMapping(value = "/start",method = RequestMethod.POST)
     @ResponseBody
-    public void startLucene(){
+    public boolean startLucene(){
         lucene l = new lucene(this.keyWordRepository);
         System.out.println("ejecute");
         l.exec_lucene(this.peliculaRepository,estadisticaRepository,this.generoRepository);
         System.out.println("termine");
+        return true;
     }
 
     @CrossOrigin
@@ -48,6 +50,19 @@ public class LuceneService {
         response.put("generos",this.generoRepository.findAll());
         System.out.println("termine");
         return response;
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/heatmap/{genero}",method = RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<String> getHeatMapByGender(@PathVariable String genero){
+        lucene l = new lucene(this.keyWordRepository);
+        System.out.println("dasdas\n");
+        ArrayList<String> res;
+        res = l.tweetsbyGender(this.peliculaRepository, genero);
+        return res;
+
+
     }
 
 

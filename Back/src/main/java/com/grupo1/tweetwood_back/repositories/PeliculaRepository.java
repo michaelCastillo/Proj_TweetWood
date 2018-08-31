@@ -14,4 +14,5 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
     public Pelicula findPeliculaByNombre(String nombre);
 
 
+
 }

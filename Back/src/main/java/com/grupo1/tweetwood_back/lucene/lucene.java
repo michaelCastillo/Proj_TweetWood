@@ -45,6 +45,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
+
 public class lucene {
 
      private static KeyWordRepository keywordRepository;
@@ -54,12 +55,16 @@ public class lucene {
      private KeyWordRepository keyWordRepository;
      @Autowired
      private PeliculaRepository peliculaRepository;
+     private GeneroRepository generoRepository;
+
+     private String characterFilter = "[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]";
 
      public lucene(KeyWordRepository keyWordRepository){
          this.keyWordRepository = keyWordRepository;
      }
 
      public boolean createIndex(DBCursor db_cursor){
+         Random rand = new Random(System.currentTimeMillis());
         try{
             Directory dir = FSDirectory.open(Paths.get("index/"));
             Analyzer analyzer = new StandardAnalyzer();
@@ -78,20 +83,32 @@ public class lucene {
                 if(obj.get("retweetedStatus") != null){
                     doc.add(new TextField("retweetCount",((DBObject)obj.get("retweetedStatus")).get("retweetCount").toString(), Field.Store.YES));
                     doc.add(new TextField("numLikes",((DBObject)obj.get("retweetedStatus")).get("favoriteCount").toString(), Field.Store.YES));
+
                 }else{
                     doc.add(new TextField("retweetCount","0", Field.Store.YES));
                     doc.add(new TextField("numLikes","0", Field.Store.YES));
                 }
 
+                //int comuna_index = rand.nextInt(comunaSantiago.size()+1);
                 doc.add(new StringField("id_user",((DBObject)obj.get("user")).get("_id").toString(),Field.Store.YES));
                 doc.add(new StringField("name_user",((DBObject)obj.get("user")).get("name").toString(),Field.Store.YES));
                 doc.add(new StringField("num_followers",((DBObject)obj.get("user")).get("followersCount").toString(),Field.Store.YES));
+                //doc.add(new StringField("location",((DBObject)obj.get("user")).get("location").toString(),Field.Store.YES));
+                if(((DBObject)obj.get("user")).get("location") != null) {
+                    //String aux = ((DBObject) obj.get("user")).get("location").toString().replaceAll(characterFilter, "");
+                    doc.add(new StringField("location", ((DBObject) obj.get("user")).get("location").toString(), Field.Store.YES));
+                }
+                else if(((DBObject)obj.get("user")).get("location") == null){
+                    doc.add(new StringField("location","Paraguay",Field.Store.YES));
+                }
                 if(writer.getConfig().getOpenMode() == OpenMode.CREATE){
                     writer.addDocument(doc);
                 }
                 else{
                     writer.updateDocument(new Term("id",obj.get("_id").toString()),doc);
                 }
+                //rand.setSeed(System.currentTimeMillis());
+
             }
             writer.close();
 
@@ -101,6 +118,8 @@ public class lucene {
         }
         return true;
     }
+
+
 
     public ArrayList<Map<String,String>> searchIndex(String film, int op){
          ArrayList<Map<String,String>> docs = new ArrayList<>();
@@ -126,6 +145,10 @@ public class lucene {
 
                     doc_elements.put("name_user",doc.get("name_user"));
                     doc_elements.put("num_followers",doc.get("num_followers"));
+                    doc_elements.put("location",doc.get("location"));
+                }
+                else if(op == 2){
+                    doc_elements.put("location",doc.get("location"));
                 }
                 docs.add(doc_elements);
             }
@@ -143,7 +166,7 @@ public class lucene {
         String out;
         StringBuffer sb = new StringBuffer();
         try{
-            URL url = new URL("http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/keywords/");
+                URL url = new URL("http://167.99.155.164:8080/tweetwood_back-0.0.1-SNAPSHOT/keywords/");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("GET");
@@ -178,7 +201,7 @@ public class lucene {
 
     public List<List<Map<String,String>>> getUsers(PeliculaRepository peliculaRepository, EstadisticaRepository estadisticaRepository, GeneroRepository generoRepository){
         MongoClient myMongo;
-        myMongo = new MongoClient("206.189.224.139:27017");
+        myMongo = new MongoClient("167.99.155.164:27017");
         DB db = myMongo.getDB("twitternew");
         DBCollection dbCollection = db.getCollection("statusJSONImpl");
         DBCursor db_cursor = dbCollection.find();
@@ -278,6 +301,42 @@ public class lucene {
         //System.out.println("mapped users => "+ mappedUsers);
          return mappedUsers;
     }
+
+    public ArrayList<String> tweetsbyGender(PeliculaRepository peliculaRepository, String genero){
+         //sat = new SentimentAnalysisTweets();
+         Map<String, Integer> opinionByComuna = new HashMap<>();
+         MongoClient myMongo = new MongoClient("167.99.155.164:27017");
+         DB db = myMongo.getDB("twitternew");
+         DBCollection dbCollection = db.getCollection("statusJSONImpl");
+         DBCursor db_cursor = dbCollection.find();
+         ArrayList<Map<String,String>> tweets;
+        // boolean isIndexReady = createIndex(db_cursor);
+         List<Pelicula> peliculas = peliculaRepository.findAll();
+         ArrayList<String> filmsInGender = new ArrayList<>();
+         ArrayList<String> opinionByWorld = new ArrayList<>();
+         for(Pelicula p: peliculas) {
+             for(Genero g: p.getGeneros()){
+                 if(g.getNombre().toLowerCase().equals(genero.toLowerCase()))
+                     filmsInGender.add((p.getNombre()));
+             }
+         }
+         for(String f: filmsInGender){
+             tweets = searchIndex(f,2);
+             for(Map<String,String> t: tweets){
+                 if(t.get("location").contains(",")){
+                     String[] aux = t.get("location").split(",");
+                     String aux2 = aux[1].replaceAll(characterFilter,"");
+                     opinionByWorld.add(aux2);
+                 }
+                 else if(t.get("location").equals("none"))
+                     opinionByWorld.add("Chile");
+                 else if(t.get("location") == null)
+                     opinionByWorld.add("Paraguay");
+             }
+         }
+         return opinionByWorld;
+
+     }
 
     //@Autowired
     public void exec_lucene(PeliculaRepository peliculaRepository, EstadisticaRepository estadisticaRepository,
@@ -386,8 +445,6 @@ public class lucene {
             generoRepository.save(genero);
         }
     }
-
-
 
 }
 
