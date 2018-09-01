@@ -8,7 +8,7 @@
           required
         ></v-text-field>
         <v-text-field
-          v-model="url"
+          v-model="url_img"
           label="Url Imagen"
           required
         ></v-text-field>
@@ -77,14 +77,15 @@
       title: '',
       genre: '',
       id_api: '',
-      url: '',
+      url_img: '',
       newWord: null,
       keyWords: [],
       film: null,
       checkbox: false,
       genres: null,
       selected: [],
-      row: null
+      row: null,
+      url: 'http://167.99.155.164:8080'
     }),
     mounted(){
       this.id = this.$route.params.id;
@@ -98,8 +99,8 @@
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
-          let global_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear`;
-          let put_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas`;
+          let global_url = this.url+`/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear`;
+          let put_url = this.url+`/tweetwood_back-0.0.1-SNAPSHOT/peliculas`;
           let keywordsList = [];
           let genresList = [];
           this.keyWords.map(keyword =>{
@@ -167,13 +168,13 @@
         this.keyWords.splice(index,1);
       },
       getFilm() {
-          axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id)
+          axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id)
               .then((film) => {
                   this.film = film.data;
                   this.title = this.film.nombre;
                   this.restriction = this.film.restriccion;
                   this.id_api = this.film.idApi;
-                  this.url = this.film.img;
+                  this.url_img = this.film.img;
                   this.film.keywords.map(keyword =>{
                     this.keyWords.push(keyword.palabra);
                   });
@@ -182,7 +183,7 @@
               });
       },
       getGenres() {
-        axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos/disponibles')
+        axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/generos/disponibles')
         .then((genres)=>{
           this.genres = genres.data;
           });

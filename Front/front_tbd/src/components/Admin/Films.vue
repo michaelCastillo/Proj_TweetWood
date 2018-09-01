@@ -59,20 +59,21 @@
     data: function () {
       return {
         films: null,
-        def: -1
+        def: -1,
+        url: 'http://167.99.155.164:8080'
       }
     },
     methods:
     {
       getFilms() {
         //https://api.themoviedb.org/3/movie/now_playing?api_key=7917990738a6b09dbb79384b066eca6b
-        axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas')
+        axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas')
         .then((films)=>{
           this.films=films.data;
           });
       },
       del(id){
-        axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas',{data:{id_pelicula:id}})
+        axios.delete(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas',{data:{id_pelicula:id}})
         .then(response =>{
           console.log(response);
           this.getFilms();
@@ -84,7 +85,7 @@
         this.$router.push({name: 'new-film', params:{ id: id}});
       },
       able(id){
-        axios.put('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/disponible',{id_pelicula:id})
+        axios.put(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/disponible',{id_pelicula:id})
         .then(response =>{
           console.log(response);
           this.getFilms();
@@ -105,7 +106,7 @@
                   generos: [],
                   keywords: [{palabra:peli.title}]
                 }
-                axios.post('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear',obj)
+                axios.post(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/crear',obj)
                 // .then(response =>{
                 //   console.log(obj);
                 // })
@@ -117,9 +118,9 @@
             });
       },
       delAll(){
-        axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/keywords/deleteAll')
+        axios.delete(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/keywords/deleteAll')
             .then(()=>{
-              axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/deleteAll')
+              axios.delete(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/deleteAll')
                   .then(()=>{
                     this.getFilms();
                   }).catch(error => {
@@ -130,7 +131,7 @@
             });
       },
       startLucene(){
-        axios.post('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/lucene/start')
+        axios.post(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/lucene/start')
         .then(response=>{
           console.log(response);
         });

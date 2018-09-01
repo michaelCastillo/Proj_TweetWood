@@ -45,12 +45,13 @@
             poster: 'https://image.tmdb.org/t/p/w342/',
             datacollectionBar: null,
             films2: null,
-            datacollectionBar2: null
+            datacollectionBar2: null,
+            url: 'http://167.99.155.164:8080'
         }
     },
     methods:{
       getFilms() {
-          axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/mostValuated')
+          axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/mostValuated')
               .then((film) => {
                   this.films = film.data;
 
@@ -64,7 +65,7 @@
                   let dataList=[];
                   for(let i=0; i<this.films.length; i++){
                     labelList.push(this.films[i].nombre);
-                    dataList.push(this.films[i].value);
+                    dataList.push(Math.log10(this.films[i].value));
                   }
                   this.datacollectionBar= {
                     labels: labelList,
@@ -79,14 +80,14 @@
                 }).catch((err) => console.error(err));
               },
               getFilms2() {
-                axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/mostTweeted')
+                axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/mostTweeted')
                 .then((film) => {
                   this.films2 = film.data;
                   let labelList2=[];
                   let dataList2=[];
                   for(let i=0; i<this.films2.length; i++){
                     labelList2.push(this.films2[i].nombre);
-                    dataList2.push(this.films2[i].numTweets);
+                    dataList2.push(Math.log10(this.films2[i].numTweets));
                   }
                   this.datacollectionBar2= {
                   labels: labelList2,
@@ -110,7 +111,7 @@
 </script>
 <style scoped>
   .bar-chart {
-    background-color: white;
+    background-color: dark;
   }
 
   .app-home-container {

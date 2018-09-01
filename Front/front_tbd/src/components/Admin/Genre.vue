@@ -52,7 +52,8 @@
       },
     data: function(){
       return{
-        genres: null
+        genres: null,
+        url: 'http://167.99.155.164:8080'
       }
     },
     methods:
@@ -61,13 +62,13 @@
         this.$router.push({name: 'new-genre'});
       },
       getGenres() {
-        axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos')
+        axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/generos')
         .then((genres)=>{
           this.genres = genres.data.sort();
           });
       },
       able(id){
-        axios.put('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos/setDisponible', {id_genero:id})
+        axios.put(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/generos/setDisponible', {id_genero:id})
         .then(response =>{
           console.log(response);
           alert("Habilitaste el género con ID: "+ id);
@@ -77,7 +78,7 @@
         });
       },
       del(id){
-        axios.delete('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos', {data:{id_genero:id}})
+        axios.delete(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/generos', {data:{id_genero:id}})
         .then(response =>{
           console.log(response);
           alert("Desabilitaste el género con ID: "+id);

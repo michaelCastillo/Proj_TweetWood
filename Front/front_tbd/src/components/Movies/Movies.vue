@@ -27,7 +27,8 @@
             return {
                 films: null,
                 img: 'https://image.tmdb.org/t/p/w500',
-                api_key: "/images?api_key=946fc3c5365c912765fffe16866d65ed"
+                api_key: "/images?api_key=946fc3c5365c912765fffe16866d65ed",
+                url: 'http://167.99.155.164:8080'
             }
         },
         mounted(){
@@ -35,7 +36,7 @@
         },
         methods: {
             getFilms() {
-                axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/disponibles')
+                axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/disponibles')
                     .then((films)=>{this.films=films.data;})
                     .catch((err) => console.error(err))
                     .then(() => {

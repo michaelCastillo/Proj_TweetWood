@@ -53,12 +53,13 @@
                     // password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
                     // 'Password must contain an upper case letter, a numeric character, and a special character',
                     required: v => !!v || 'This field is required'
-                }
+                },
+                url: 'http://167.99.155.164:8080'
             }
         },
         methods: {
             submit(){
-                let url = "http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/login/"+this.email+"/"+this.password;
+                let url_aux = this.url+'/tweetwood_back-0.0.1-SNAPSHOT/login/'+this.email+'/'+this.password;
 
                 // if(this.$refs.form.validate()){
                 //     axios.get(url, {
@@ -69,7 +70,7 @@
 
                 // if(this.$refs.form.validate()){
                     console.log(this.email + " | " + this.password)
-                    axios.get(url).then((response) => console.log(response)).catch((err) => console.error(err))
+                    axios.get(url_aux).then((response) => console.log(response)).catch((err) => console.error(err))
                 // }
             },
             login(){

@@ -50,6 +50,7 @@
         data(){
             return {
                 data: null,
+                url: 'http://167.99.155.164:8080',
                 group_id: 2,
                 group_id_size: [],
                 graph: {
@@ -388,7 +389,7 @@
                 })
             },
             getData(){
-                axios.get('http://206.189.224.139:8080/neofourjay-0.0.1-SNAPSHOT/init/getStatics')
+                axios.get(this.url+'/neofourjay-0.0.1-SNAPSHOT/init/getStatics')
                      .then((response) => {
                          this.data = response.data;
                          let count = 0;

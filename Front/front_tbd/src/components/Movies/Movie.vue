@@ -105,6 +105,7 @@
         mounted() {
             this.id = this.$route.params.id;
             this.getFilm();
+            //this.updateChartFill();
         },
         updated(){
             this.getApiData(this.film.idApi);
@@ -121,12 +122,13 @@
                 datacollectionLine2: null,
                 tweetList: [],
                 maxTweet: -1,
-                dateMaxTweet: null
+                dateMaxTweet: null,
+                url: 'http://167.99.155.164:8080'
             }
         },
         methods: {
           getFilm() {
-              axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id)
+              axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/peliculas/' + this.id)
                   .then((film) => {
                       this.film = film.data;
                       this.splitTweet();

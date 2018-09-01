@@ -16,7 +16,8 @@
       valid: true,
       genre: null,
       title: '',
-      id: null
+      id: null,
+      url: 'http://167.99.155.164:8080'
     }),
     mounted(){
       this.id = this.$route.params.id;
@@ -26,7 +27,7 @@
     methods: {
       submit () {
         if (this.$refs.form.validate()) {
-          let global_url = `http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos`;
+          let global_url = this.url+`/tweetwood_back-0.0.1-SNAPSHOT/generos`;
           if(this.id==-1){
             let objPost = {
               nombre: this.title,
@@ -58,7 +59,7 @@
         }
       },
       getGenre() {
-          axios.get('http://206.189.224.139:8080/tweetwood_back-0.0.1-SNAPSHOT/generos/' + this.id)
+          axios.get(this.url+'/tweetwood_back-0.0.1-SNAPSHOT/generos/' + this.id)
               .then((genres) => {
                   this.genre = genres.data;
                   this.title = this.genre.nombre;
