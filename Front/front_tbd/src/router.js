@@ -10,6 +10,7 @@ import Films from './components/Admin/Films.vue'
 import NewGenre from './components/Admin/NewGenre.vue'
 import NeoGraph from './components/Movies/Grafo.vue'
 import Login from './components/Login/Login.vue'
+import MapGraph from './components/Movies/MapGraph.vue'
 
 Vue.use(Router)
 
@@ -66,6 +67,11 @@ export default new Router({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/map',
+            name: 'map',
+            component: MapGraph
         }
     ]
 })

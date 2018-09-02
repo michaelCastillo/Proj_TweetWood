@@ -7,15 +7,17 @@
                     <v-list-tile-action><v-icon>home</v-icon></v-list-tile-action>
                     <v-list-tile-content><v-list-tile-title >Página Principal</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
-                <v-divider></v-divider>
                 <v-list-tile to="/films">
                     <v-list-tile-action><v-icon>local_movies</v-icon></v-list-tile-action>
                     <v-list-tile-content><v-list-tile-title>Películas</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
-                <v-divider></v-divider>
                 <v-list-tile to="/graph">
                     <v-list-tile-action><v-icon>share</v-icon></v-list-tile-action>
                     <v-list-tile-content><v-list-tile-title>Grafo</v-list-tile-title></v-list-tile-content>
+                </v-list-tile>
+                 <v-list-tile to="/map">
+                    <v-list-tile-action><v-icon>map</v-icon></v-list-tile-action>
+                    <v-list-tile-content><v-list-tile-title>Mapa</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
                 <v-divider></v-divider>
                 <v-subheader>Administrator</v-subheader>
