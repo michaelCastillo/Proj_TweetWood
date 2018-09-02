@@ -11,13 +11,17 @@
 
 <script>
     import * as d3plus from 'd3plus';
-    import la from './data/la.json';
+    import la from './data/world.json';
 
     export default {
         name: 'mapGraph',
         data(){
             return{
-               
+               popData: [
+                    {id: "AFG", population: 4830620}, 
+                    {id: "AL", population: 733375},
+                    {id: "BRA", population: 8000000}
+                ]
             }
         },
         mounted(){
@@ -26,13 +30,16 @@
         methods:{
             loadMap(){
                 var chart = new d3plus.Geomap()
-                  
-                  .groupBy("id")
-                  .select("#mapa")
-                  .colorScale("Aprobación");
+                    .data(this.popData)
+                    .groupBy("id")
+                    .select("#mapa")
+                    .colorScale("population");
 
                 chart
-                  .topojson(la);
+                  .topojson(la)
+                  .fitFilter(function(d) {
+                        return ["AFG", "AL", "BR"].indexOf(d.id) < 0;
+                    });
 
                 chart.render();
             }
@@ -44,5 +51,6 @@
 #mapa{
     width: 1000px;
     height: 600px;
+    background-color: white;
 }
 </style>
