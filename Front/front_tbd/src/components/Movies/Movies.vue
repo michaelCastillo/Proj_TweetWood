@@ -3,7 +3,7 @@
         <v-layout row wrap>
             <v-flex xl1 lg3 md4 sm6 xs12 class="movie-box" v-for="film in films" :key="film.id">
                 <div v-if="film.img !== null">
-                    <v-card width="300px" class="movie-card" hover :to="{name: 'film', params:{ id: film.id }}">
+                    <v-card width="300px" class="movie-card"  hover :to="{name: 'film', params:{ id: film.id }}">
                         <v-card-media :src="img+film.img" height="450">
                         </v-card-media>
                         <v-card-title primary-title class="title-card">

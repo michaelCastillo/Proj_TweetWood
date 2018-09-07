@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import AppMovies from './components/Movies/Movies.vue'
 import AppMovie from './components/Movies/Movie.vue'
 import AppHome from './components/Home/Home.vue'
+import HomePage from './components/Home/HomePage.vue'
 import Admin from './components/Admin/Admin.vue'
 import NewFilm from './components/Admin/NewFilm.vue'
 import Genre from './components/Admin/Genre.vue'
@@ -19,6 +20,11 @@ export default new Router({
     routes: [
         {
             path: '/',
+            name: 'home-page',
+            component: HomePage
+        },
+        {
+            path: '/charts',
             name: 'app-home',
             component: AppHome
         },

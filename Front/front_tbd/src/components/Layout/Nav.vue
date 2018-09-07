@@ -1,6 +1,6 @@
 <template>
     <div id="app-nav">
-        <v-navigation-drawer v-model="drawer" app temporary >
+        <v-navigation-drawer dark v-model="drawer" app temporary >
             <v-list dense>
                 <v-subheader>TweetWood</v-subheader>
                 <v-list-tile to="/">
@@ -32,7 +32,6 @@
             <v-toolbar-title class="app-title">TweetWood</v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
-
     </div>
 </template>
 
