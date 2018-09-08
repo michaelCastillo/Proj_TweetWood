@@ -8,6 +8,8 @@ import com.grupo1.tweetwood_back.repositories.KeyWordRepository;
 import com.grupo1.tweetwood_back.repositories.PeliculaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import twitter4j.JSONArray;
+import twitter4j.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,12 +57,14 @@ public class LuceneService {
     @CrossOrigin
     @RequestMapping(value = "/heatmap/{genero}",method = RequestMethod.GET)
     @ResponseBody
-    public ArrayList<String> getHeatMapByGender(@PathVariable String genero){
+    public ArrayList<Map<String, Object>> getHeatMapByGender(@PathVariable String genero){
         lucene l = new lucene(this.keyWordRepository);
         System.out.println("dasdas\n");
         ArrayList<String> res;
         res = l.tweetsbyGender(this.peliculaRepository, genero);
-        return res;
+        //ArrayList<JSONObject> res2 = new ArrayList<>();
+        //res2 = l.countCountries(res);
+        return l.countCountries(res);
 
 
     }

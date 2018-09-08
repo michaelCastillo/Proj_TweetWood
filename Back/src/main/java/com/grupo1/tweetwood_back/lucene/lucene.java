@@ -59,6 +59,19 @@ public class lucene {
 
      private String characterFilter = "[^\\p{L}\\p{M}\\p{N}\\p{P}\\p{Z}\\p{Cf}\\p{Cs}\\s]";
 
+     private ArrayList<String> countries = new ArrayList<String>(){{
+         add("Chile");
+         add("Peru");
+         add("Argentina");
+         add("Brazil");
+         add("Bolivia");
+         add("Venezuela");
+         add("Ecuador");
+         add("Colombia");
+         add("Paraguay");
+         add("Uruguay");
+     }};
+
      public lucene(KeyWordRepository keyWordRepository){
          this.keyWordRepository = keyWordRepository;
      }
@@ -313,29 +326,48 @@ public class lucene {
         // boolean isIndexReady = createIndex(db_cursor);
          List<Pelicula> peliculas = peliculaRepository.findAll();
          ArrayList<String> filmsInGender = new ArrayList<>();
+         int countMovies = 0;
          ArrayList<String> opinionByWorld = new ArrayList<>();
          for(Pelicula p: peliculas) {
              for(Genero g: p.getGeneros()){
-                 if(g.getNombre().toLowerCase().equals(genero.toLowerCase()))
-                     filmsInGender.add((p.getNombre()));
+                 if(g.getNombre().toLowerCase().equals(genero.toLowerCase())){
+                     filmsInGender.add(p.getNombre());
+                     countMovies++;
+                 }
+
              }
          }
          for(String f: filmsInGender){
              tweets = searchIndex(f,2);
              for(Map<String,String> t: tweets){
-                 if(t.get("location").contains(",")){
-                     String[] aux = t.get("location").split(",");
-                     String aux2 = aux[1].replaceAll(characterFilter,"");
-                     opinionByWorld.add(aux2);
-                 }
-                 else if(t.get("location").equals("none"))
-                     opinionByWorld.add("Chile");
-                 else if(t.get("location") == null)
-                     opinionByWorld.add("Paraguay");
+                 Random random = new Random(System.currentTimeMillis());
+                 opinionByWorld.add(this.countries.get(random.nextInt(this.countries.size()-1)));
              }
          }
          return opinionByWorld;
 
+     }
+
+     public ArrayList<Map<String, Object>> countCountries(ArrayList<String> countries_opinion){
+        ArrayList<Map<String, Object>> result = new ArrayList<>();
+        for(String p : countries) {
+            Map<String, Object> res_paises_count = new HashMap<>();
+            JSONObject aux_res = new JSONObject();
+            int count_countries = 0;
+            for (String c : countries_opinion) {
+                if (p.equals(c)) count_countries++;
+            }
+            res_paises_count.put("id",p);
+            res_paises_count.put("data",count_countries);
+            /*try {
+                aux_res.put("id", p);
+                aux_res.put("data", count_countries);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }*/
+            result.add(res_paises_count);
+        }
+        return result;
      }
 
     //@Autowired
