@@ -6,7 +6,7 @@
                 <v-select dark :items="generos" item-text="nombre" item-value="id" @change="loadMaps" placeholder="Selecciona un género aquí" label="Géneros" prepend-icon="movie"></v-select>
             </div>
         </v-flex>
-        <div v-if="popData !== null">
+        <div v-if="dataAprobacion !== null">
             <v-layout>
                 <v-flex xs4 offset-xs2>
                     <div id="mapa1"></div>
@@ -17,7 +17,7 @@
             </v-layout>
         </div>
         <div v-else>
-            <h3>Selecciona una categoría!</h3>
+            <h2 class="map-title">Selecciona una categoría!</h2>
         </div>
     </v-container>
 </template>
@@ -44,7 +44,8 @@
                 chart: null,
                 chart2: null,
                 generos: [],
-                popData: null
+                dataAprobacion: null,
+                dataRechazo: null
             }
         },
         beforeMount(){
@@ -80,26 +81,34 @@
                     .then((heat)=>{
                         this.popData = [];
                         var newData = [];
+                        var newData1 = [];
                         var data = heat.data;
                         for(var i = 0; i < data.length; i++)
                         {
                             var pais = {
                                 id: data[i].id_str,
-                                data: data[i].data
+                                data: data[i].data * 0.7
+                            }
+
+                            var pais1 = {
+                                id: data[i].id_str,
+                                data: data[i].data * 0.3
                             }
 
                             newData.push(pais);
-                        }
+                            newData1.push(pais1);
 
-                        this.popData = newData;
+                        }
+                        this.dataAprobacion = newData;
+                        this.dataRechazo = newData1;
                       });
 
-                this.chart.data(this.popData);
-                this.chart2.data(this.popData);
+                // this.chart.data(this.dataAprobacion);
+                // this.chart2.data(this.dataRechazo);
             },
             loadMapAprobacion(){
                 this.chart
-                    .data(this.popData)
+                    .data(this.dataAprobacion)
                     .groupBy("id")
                     .select("#mapa1")
                     .colorScale("data")
@@ -113,14 +122,14 @@
             },
             loadMapRechazo(){
                 this.chart2
-                    .data(this.popData)
+                    .data(this.dataRechazo)
                     .groupBy("id")
                     .select("#mapa2")
                     .colorScale("data")
                     .colorScalePosition("right");
 
                 this.chart2
-                    .colorScaleConfig({color: ["#db8181", "#c66161", "#993b3b", "#721e1e", "#630e0e"]})
+                    .colorScaleConfig({color: ["#630e0e", "#721e1e", "#993b3b", "#c66161", "#db8181"]})
                     .topojson(la)
 
                 this.chart2.render();
@@ -141,6 +150,7 @@
     text-align: center;
     color: white;
 }
+
 
 
 #mapa1{
