@@ -1,20 +1,22 @@
 <template>
     <v-app dark id="app-movies">
-        <v-layout row wrap>
-            <v-flex xl1 lg3 md4 sm6 xs12 class="movie-box" v-for="film in films" :key="film.id">
-                <div v-if="film.img !== null">
-                    <v-card width="300px" class="movie-card"  hover :to="{name: 'film', params:{ id: film.id }}">
-                        <v-card-media :src="img+film.img" height="450">
-                        </v-card-media>
-                        <v-card-title primary-title class="title-card">
-                            <div>
-                                <h3 class="headline mb-0">{{ film.nombre}}</h3>
-                            </div>
-                        </v-card-title>
-                    </v-card>
-                </div>
-            </v-flex>
-        </v-layout>
+        <v-container grid-list-xs>
+            <v-layout row wrap>
+                <v-flex lg2 offset-lg1 class="movie-box" v-for="film in films" :key="film.id">
+                    <div v-if="film.img !== null">
+                        <v-card width="300px" class="movie-card"  hover :to="{name: 'film', params:{ id: film.id }}">
+                            <v-card-media :src="img+film.img" height="450">
+                            </v-card-media>
+                            <v-card-title primary-title class="title-card">
+                                <div>
+                                    <h3 class="headline mb-0">{{ film.nombre}}</h3>
+                                </div>
+                            </v-card-title>
+                        </v-card>
+                    </div>
+                </v-flex>
+            </v-layout>
+        </v-container>
     </v-app>
 </template>
 
@@ -58,13 +60,13 @@
 </script>
 
 <style scoped>
-    .movie-card {
+    /*.movie-card {
         margin: 5% 20%;
-    }
-    .movie-card-actions {
+    }*/
+    /*.movie-card-actions {
         margin: 1% 1%;
         padding: 0px 90px;
-    }
+    }*/
 
     .title-card {
         background-color: #212121;

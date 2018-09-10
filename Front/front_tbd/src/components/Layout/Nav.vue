@@ -11,6 +11,10 @@
                     <v-list-tile-action><v-icon>local_movies</v-icon></v-list-tile-action>
                     <v-list-tile-content><v-list-tile-title>Películas</v-list-tile-title></v-list-tile-content>
                 </v-list-tile>
+                <v-list-tile to="/charts">
+                    <v-list-tile-action><v-icon>far fa-chart-bar</v-icon></v-list-tile-action>
+                    <v-list-tile-content><v-list-tile-title>Gráficos</v-list-tile-title></v-list-tile-content>
+                </v-list-tile>
                 <v-list-tile to="/graph">
                     <v-list-tile-action><v-icon>share</v-icon></v-list-tile-action>
                     <v-list-tile-content><v-list-tile-title>Grafo</v-list-tile-title></v-list-tile-content>

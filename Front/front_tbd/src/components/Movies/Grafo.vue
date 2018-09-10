@@ -511,6 +511,7 @@
         text-align: center;
         justify-content: initial;
         color: white;
+        position: relative;
     }
 
     .generos {
@@ -521,6 +522,7 @@
         text-align: center;
         justify-content: initial;
         color: white;
+        position: relative;
     }
 
     .pelicula {
@@ -531,6 +533,7 @@
         text-align: center;
         justify-content: initial;
         color: white;
+        position: relative;
     }
 
     .flex {

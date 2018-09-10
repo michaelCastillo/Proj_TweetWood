@@ -21,6 +21,7 @@
     "vue": "^2.5.16",
     "vue-chartjs": "^3.3.2",
     "vue-router": "^3.0.1",
+    "vue-spinner": "^1.0.3",
     "vue-tweet-embed": "^2.1.1",
     "vuetify": "^1.0.18"
   },

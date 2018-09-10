@@ -5,7 +5,7 @@
       column
       justify-center>
       <h1 class="display-4 font-weight-thin mb-3">TweetWood</h1>
-      <h4 class="title">Analisis de las ultimas peliculas comentadas en Twitter!</h4>
+      <h4 class="title">Análisis de las últimas películas comentadas en Twitter!</h4>
       <br><br>
         <div class="text-xs-center">
             <v-tooltip bottom>
@@ -63,3 +63,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+h4{
+    margin: 25px 5px;
+}
+</style>
